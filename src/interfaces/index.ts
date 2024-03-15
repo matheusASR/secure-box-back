@@ -7,6 +7,20 @@ import {
   IUpdateUser,
 } from "./user.interfaces";
 
+import {
+  AllocationCreate,
+  AllocationRead,
+  AllocationRepo,
+  IAllocationReturn,
+} from "./allocation.interfaces"
+
+import {
+  CageCreate,
+  CageRead,
+  CageRepo,
+  ICageReturn,
+} from "./cage.interfaces"
+
 import { Login, LoginReturn } from "./login.interfaces";
 
 export {
@@ -18,4 +32,12 @@ export {
   IUpdateUser,
   Login,
   LoginReturn,
+  AllocationCreate,
+  AllocationRead,
+  AllocationRepo,
+  IAllocationReturn,
+  CageCreate,
+  CageRead,
+  CageRepo,
+  ICageReturn,
 };

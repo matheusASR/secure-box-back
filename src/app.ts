@@ -2,10 +2,8 @@ import "reflect-metadata";
 import "express-async-errors";
 import express, { Application, json } from "express";
 import cors from "cors";
-// import {
-  
-// } from "./routers";
-// import middlewares from "./middlewares";
+import { loginRouter, userRouter } from "./routers";
+import middlewares from "./middlewares";
 
 const app: Application = express();
 app.use(json());
@@ -25,7 +23,10 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-// app.use("/users", userRouter);
-// app.use(middlewares.handleError);
+app.use("/users", userRouter);
+app.use("/login", loginRouter);
+// app.use("/cages", cageRouter)
+// app.use("/allocations", allocationRouter);
+app.use(middlewares.handleError);
 
 export default app;

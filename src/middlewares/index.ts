@@ -4,12 +4,16 @@ import { verifyIdExists } from "./verifyIdExists.middlewares";
 import { verifyEmailExists } from "./verifyEmailExists.middlewares";
 import { verifyCpfExists } from "./verifyCpfExists.middlewares";
 import { verifyCelExists } from "./verifyCelExists.middlewares";
+import { validateBody } from "./validateBody.middlewares";
+import { isAccountOwner } from "./isAccountOwner.middlewares";
 
-export {
+export default {
   handleError,
   verifyToken,
   verifyIdExists,
   verifyEmailExists,
   verifyCpfExists,
-  verifyCelExists
+  verifyCelExists,
+  validateBody,
+  isAccountOwner
 };
