@@ -1,0 +1,17 @@
+import { AppError } from "../errors";
+import { z } from "zod";
+
+const handleError = (error, req, res, next) => {
+  if (error instanceof AppError) {
+    return res.status(error.status).json({ message: error.message });
+  }
+
+  if (error instanceof z.ZodError) {
+    return res.status(400).json({ message: error.flatten().fieldErrors });
+  }
+
+  console.error(error);
+  return res.status(500).json({ message: "Internal server error" });
+};
+
+export { handleError };
