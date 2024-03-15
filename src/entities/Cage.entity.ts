@@ -6,8 +6,8 @@ export class Cage {
   id: number;
 
   @Column({ length: 150 })
-  localizacao: string;
+  location: string;
 
   @Column({ default: true })
-  disponibilidade: boolean;
+  availability: boolean;
 }

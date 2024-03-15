@@ -25,16 +25,19 @@ export class User {
   cpf: string;
 
   @Column({ length: 11, unique: true })
-  rg: string;
-
-  @Column({ length: 11, unique: true })
   cel: string;
 
   @Column({ type: "date" })
   birthdate: string;
 
-  @Column({ length: 150 })
-  address: string;
+  @Column({ type: "jsonb" })
+  address: {
+    street: string;
+    number: number;
+    city: string;
+    state: string;
+    complement?: string;
+  };
 
   @Column({ default: false })
   admin: boolean;
