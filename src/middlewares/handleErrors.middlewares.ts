@@ -1,7 +1,13 @@
+import { NextFunction, Request, Response } from "express";
 import { AppError } from "../errors";
 import { z } from "zod";
 
-const handleError = (error, req, res, next) => {
+const handleError = (
+  error: unknown,
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Response => {
   if (error instanceof AppError) {
     return res.status(error.status).json({ message: error.message });
   }

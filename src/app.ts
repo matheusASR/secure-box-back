@@ -1,18 +1,18 @@
 import "reflect-metadata";
 import "express-async-errors";
-import express, { json } from "express";
+import express, { Application, json } from "express";
 import cors from "cors";
 // import {
   
 // } from "./routers";
 // import middlewares from "./middlewares";
 
-const app = express();
+const app: Application = express();
 app.use(json());
-// const allowedOrigins = ["http://localhost:5173"];
+const allowedOrigins = [""];
 
 const corsOptions = {
-  origin: function (origin, callback) {
+  origin: function (origin: any, callback: any) {
     if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
       callback(null, true);
     } else {
@@ -26,8 +26,6 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // app.use("/users", userRouter);
-// app.use("/login", loginRouter);
-// app.use("/profile", profileRouter)
-app.use(middlewares.handleError);
+// app.use(middlewares.handleError);
 
 export default app;

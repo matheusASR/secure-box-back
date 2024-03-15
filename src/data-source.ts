@@ -1,13 +1,13 @@
-import { DataSource } from "typeorm";
+import { DataSource, DataSourceOptions } from "typeorm";
 import path from "path";
 import 'reflect-metadata';
 import "dotenv/config";
 
-const settings = () => {
-  const entitiesPath = path.join(__dirname, "./entities/**.{ts,js}");
-  const migrationPath = path.join(__dirname, "./migrations/**.{ts,js}");
+const settings = (): DataSourceOptions => {
+  const entitiesPath: string = path.join(__dirname, "./entities/**.{ts,js}");
+  const migrationPath: string = path.join(__dirname, "./migrations/**.{ts,js}");
 
-  const dbUrl = process.env.DATABASE_URL;
+  const dbUrl: string | undefined = process.env.DATABASE_URL;
 
   if (!dbUrl) throw new Error("Missing env var: 'DATABASE_URL'");
 

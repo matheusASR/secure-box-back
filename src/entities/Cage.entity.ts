@@ -3,11 +3,11 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 @Entity("cages")
 export class Cage {
   @PrimaryGeneratedColumn("increment")
-  id;
+  id: number;
 
-  @Column({ type: 'string', length: 150 })
-  localizacao;
+  @Column({ length: 150 })
+  localizacao: string;
 
-  @Column({ type: 'boolean', default: true })
-  disponibilidade;
+  @Column({ default: true })
+  disponibilidade: boolean;
 }
