@@ -9,7 +9,7 @@ const userSchema = z.object({
   cel: z.string().max(20),
   address: z.object({
     street: z.string(),
-    number: z.number(),
+    number: z.string(),
     city: z.string(),
     state: z.string(),
     complement: z.string().optional(),

@@ -6,6 +6,7 @@ import { verifyCpfExists } from "./verifyCpfExists.middlewares";
 import { verifyCelExists } from "./verifyCelExists.middlewares";
 import { validateBody } from "./validateBody.middlewares";
 import { isAccountOwner } from "./isAccountOwner.middlewares";
+import { isAdmin } from "./isAdmin.middlewares";
 
 export default {
   handleError,
@@ -15,5 +16,6 @@ export default {
   verifyCpfExists,
   verifyCelExists,
   validateBody,
-  isAccountOwner
+  isAccountOwner,
+  isAdmin
 };

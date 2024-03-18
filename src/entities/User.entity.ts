@@ -33,7 +33,7 @@ export class User {
   @Column({ type: "jsonb" })
   address: {
     street: string;
-    number: number;
+    number: string;
     city: string;
     state: string;
     complement?: string;

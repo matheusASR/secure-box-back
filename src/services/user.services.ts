@@ -5,9 +5,9 @@ import { userReadSchema, userReturnSchema, userSchemaUpdate } from "../schemas";
 import { DeepPartial } from "typeorm";
 
 const create = async (
-  payloadUser: UserCreate
+  payloadUser: any
 ): Promise<UserReturn> => {
-  const userCreated: IUserReturn = userRepository.create(payloadUser);
+  const userCreated: any = userRepository.create(payloadUser);
   await userRepository.save(userCreated);
 
   return userReturnSchema.parse(userCreated);
@@ -25,7 +25,7 @@ const retrieve = async (id: number): Promise<IUpdateUser> => {
 
 const update = async (
   foundUser: IUserReturn,
-  payload: DeepPartial<IUpdateUser>
+  payload: DeepPartial<any>
 ): Promise<IUpdateUser> => {
   return userSchemaUpdate.parse(
     await userRepository.save({ ...foundUser, ...payload })
