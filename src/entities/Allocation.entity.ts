@@ -16,10 +16,10 @@ export class Allocation {
     @Column({ length: 50 })
     inicialDatetime: string;
 
-    @Column({ length: 50 })
+    @Column({ length: 50, default: null })
     finalDatetime: string;
 
-    @Column({ length: 10 })
+    @Column({ length: 10, default: null })
     price: string;
 
     @Column({ default: false })

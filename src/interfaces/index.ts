@@ -12,6 +12,7 @@ import {
   AllocationRead,
   AllocationRepo,
   IAllocationReturn,
+  IAllocationNotFinished
 } from "./allocation.interfaces"
 
 import {
@@ -40,4 +41,5 @@ export {
   CageRead,
   CageRepo,
   ICageReturn,
+  IAllocationNotFinished
 };

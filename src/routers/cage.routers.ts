@@ -15,5 +15,5 @@ cageRouter.post(
 );
 cageRouter.get("", cageControllers.read);
 cageRouter.get("/:id", cageControllers.retrieve);
-cageRouter.patch("/:id", middlewares.verifyToken, cageControllers.update);
-cageRouter.delete("/:id", middlewares.verifyToken, middlewares.isAdmin, cageControllers.destroy);
+cageRouter.patch("/:id", cageControllers.update);
+cageRouter.delete("/:id", middlewares.isAdmin, cageControllers.destroy);

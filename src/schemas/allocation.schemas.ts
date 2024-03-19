@@ -10,11 +10,13 @@ const allocationSchema = z.object({
   cageId: z.any()
 });
 
-const allocationCreateSchema = allocationSchema.omit({ id: true });
+const allocationCreateSchema = allocationSchema.omit({ id: true, finalDatetime: true, price: true });
+const allocationNotFinishedSchema =  allocationSchema.omit({ finalDatetime: true, price: true });
 const allocationReadSchema = allocationSchema.array();
 
 export {
   allocationSchema,
   allocationCreateSchema,
   allocationReadSchema,
+  allocationNotFinishedSchema
 };
