@@ -27,4 +27,7 @@ export class Allocation {
 
     @Column()
     finished: boolean;
+
+    @Column()
+    pressed: boolean;
 }

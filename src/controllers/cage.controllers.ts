@@ -10,8 +10,8 @@ const create = async (req: Request, res: Response): Promise<Response> => {
   return res.status(201).json(user);
 };
 
-const read = async (req: Request, res: Response): Promise<Response> => {
-  const cages: CageRead = await cageServices.read();
+const readShoppingCentro = async (req: Request, res: Response): Promise<Response> => {
+  const cages: CageRead = await cageServices.readShoppingCentro();
   return res.status(200).json(cages);
 };
 
@@ -40,4 +40,4 @@ const destroy = async (req: Request, res: Response): Promise<Response> => {
 };
 
 
-export default { create, read, retrieve, update, destroy };
+export default { create, readShoppingCentro, retrieve, update, destroy };

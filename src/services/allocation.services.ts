@@ -30,6 +30,7 @@ const read = async (): Promise<AllocationRead> => {
 
   const allocationRead = allocations.map(
     (allocation: {
+      pressed: boolean;
       id: any;
       initialDatetime: any;
       finalDatetime: any;
@@ -45,6 +46,7 @@ const read = async (): Promise<AllocationRead> => {
       price: allocation.price,
       paymentStatus: allocation.paymentStatus,
       finished: allocation.finished,
+      pressed: allocation.pressed,
       userId: allocation.user.id,
       cageId: allocation.cage.id,
     })
@@ -66,6 +68,7 @@ const retrieve = async (id: number): Promise<IAllocationReturn> => {
     price: allocation?.price,
     paymentStatus: allocation?.paymentStatus,
     finished: allocation?.finished,
+    pressed: allocation?.pressed,
     userId: allocation?.user.id,
     cageId: allocation?.cage.id,
   };
@@ -91,6 +94,7 @@ const userNotFinishedAllocations = async (userId: number): Promise<any> => {
       price: allocation.price,
       paymentStatus: allocation.paymentStatus,
       finished: allocation.finished,
+      pressed: allocation.pressed,
       userId: allocation.user ? allocation.user.id : null, // Verifica se o usuário está definido antes de acessar o ID
       cageId: allocation.cage ? allocation.cage.id : null, // Verifica se a gaiola está definida antes de acessar o ID
     })
@@ -117,6 +121,7 @@ const userFinishedAllocations = async (userId: number): Promise<any> => {
       price: allocation.price,
       paymentStatus: allocation.paymentStatus,
       finished: allocation.finished,
+      pressed: allocation.pressed,
       userId: allocation.user ? allocation.user.id : null, // Verifica se o usuário está definido antes de acessar o ID
       cageId: allocation.cage ? allocation.cage.id : null, // Verifica se a gaiola está definida antes de acessar o ID
     })

@@ -13,7 +13,8 @@ const create = async (req: Request, res: Response): Promise<Response> => {
     paymentStatus: false,
     price: "null",
     finalDatetime: "null",
-    finished: false
+    finished: false,
+    pressed: false
   }
   const allocation: any = await allocationServices.create({...restDefault, ...payload, user: userId, cage: cageId});
   return res.status(201).json(allocation);

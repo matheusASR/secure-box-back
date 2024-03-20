@@ -6,6 +6,7 @@ import { allocationControllers } from "../controllers";
 export const allocationRouter: Router = Router();
 
 allocationRouter.use("/:id", middlewares.verifyAllocationIdExists);
+allocationRouter.use("/:userId", middlewares.verifyIdExists);
 
 allocationRouter.post(
   "/:cageId",

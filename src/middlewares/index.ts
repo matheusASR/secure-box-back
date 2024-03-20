@@ -8,6 +8,7 @@ import { validateBody } from "./validateBody.middlewares";
 import { isAccountOwner } from "./isAccountOwner.middlewares";
 import { isAdmin } from "./isAdmin.middlewares";
 import { verifyAllocationIdExists } from "./verifyAllocationIdExists";
+import { verifyCageIdExists } from "./verifyCageIdExists";
 
 export default {
   handleError,
@@ -19,5 +20,6 @@ export default {
   validateBody,
   isAccountOwner,
   isAdmin,
-  verifyAllocationIdExists
+  verifyAllocationIdExists,
+  verifyCageIdExists
 };

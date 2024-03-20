@@ -5,7 +5,7 @@ import { cageControllers } from "../controllers";
 
 export const cageRouter: Router = Router();
 
-cageRouter.use("/:id", middlewares.verifyIdExists);
+cageRouter.use("/:id", middlewares.verifyCageIdExists);
 
 cageRouter.post(
   "",
@@ -13,7 +13,7 @@ cageRouter.post(
   middlewares.isAdmin,
   cageControllers.create
 );
-cageRouter.get("", cageControllers.read);
+cageRouter.get("/shoppingCentro", cageControllers.readShoppingCentro);
 cageRouter.get("/:id", cageControllers.retrieve);
 cageRouter.patch("/:id", cageControllers.update);
 cageRouter.delete("/:id", middlewares.isAdmin, cageControllers.destroy);
