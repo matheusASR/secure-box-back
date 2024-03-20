@@ -13,7 +13,8 @@ import {
   allocationSchema,
   allocationCreateSchema,
   allocationReadSchema,
-  allocationNotFinishedSchema
+  allocationNotFinishedSchema,
+  updateReturn
 } from "./allocation.schemas";
 
 export {
@@ -29,5 +30,6 @@ export {
   allocationSchema,
   allocationCreateSchema,
   allocationReadSchema,
-  allocationNotFinishedSchema
+  allocationNotFinishedSchema,
+  updateReturn
 };

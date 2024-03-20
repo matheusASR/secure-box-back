@@ -7,6 +7,7 @@ import { verifyCelExists } from "./verifyCelExists.middlewares";
 import { validateBody } from "./validateBody.middlewares";
 import { isAccountOwner } from "./isAccountOwner.middlewares";
 import { isAdmin } from "./isAdmin.middlewares";
+import { verifyAllocationIdExists } from "./verifyAllocationIdExists";
 
 export default {
   handleError,
@@ -17,5 +18,6 @@ export default {
   verifyCelExists,
   validateBody,
   isAccountOwner,
-  isAdmin
+  isAdmin,
+  verifyAllocationIdExists
 };

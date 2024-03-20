@@ -6,9 +6,17 @@ import { DeepPartial } from "typeorm";
 import { allocationRepository } from "../repositories";
 
 const create = async (req: Request, res: Response): Promise<Response> => {
-  const payload: AllocationCreate = req.body
-  const user: any = await allocationServices.create(payload);
-  return res.status(201).json(user);
+  const userId: number = Number(res.locals.userID);
+  const cageId: number = Number(req.params.cageId);
+  const payload: any = req.body
+  const restDefault = {
+    paymentStatus: false,
+    price: "null",
+    finalDatetime: "null",
+    finished: false
+  }
+  const allocation: any = await allocationServices.create({...restDefault, ...payload, user: userId, cage: cageId});
+  return res.status(201).json(allocation);
 };
 
 const read = async (req: Request, res: Response): Promise<Response> => {
@@ -22,24 +30,33 @@ const retrieve = async (req: Request, res: Response): Promise<Response> => {
   return res.status(200).json(allocation);
 };
 
-const retrieveUserAllocations = async (req: Request, res: Response): Promise<Response> => {
-  const userId: number = Number(req.params.userId);
-  const allocations: any = await allocationServices.retrieveUserAllocations(userId);
+const userNotFinishedAllocations = async (req: Request, res: Response): Promise<Response> => {
+  const userId: number = Number(req.params.userId); // Convertendo para número
+  if (isNaN(userId)) {
+    return res.status(400).json({ error: 'Invalid userId' });
+  }
+
+  const allocations: any = await allocationServices.userNotFinishedAllocations(userId);
+  return res.status(200).json(allocations);
+};
+
+const userFinishedAllocations = async (req: Request, res: Response): Promise<Response> => {
+  const userId: number = Number(req.params.userId); // Convertendo para número
+  if (isNaN(userId)) {
+    return res.status(400).json({ error: 'Invalid userId' });
+  }
+
+  const allocations: any = await allocationServices.userFinishedAllocations(userId);
   return res.status(200).json(allocations);
 };
 
 const update = async (req: Request, res: Response): Promise<Response> => {
   const id: number = Number(req.params.id);
-  const payload: DeepPartial<IAllocationReturn> = req.body;
-  const foundallocation: any = await allocationRepository.findOne({ where: { id } });
-    ////////////////////////////
-
-  const allocationUpdated: IAllocationReturn = await allocationServices.update(foundallocation, payload);
+  const payload: DeepPartial<any> = req.body;
+  const foundAllocation: any = await allocationRepository.findOne({ where: { id } });
+  const allocationUpdated: any = await allocationServices.update(foundAllocation, payload);
 
   return res.status(200).json(allocationUpdated);
 };
 
-
-
-
-export default { create, read, retrieve, retrieveUserAllocations, update };
+export default { create, read, retrieve, userNotFinishedAllocations, update, userFinishedAllocations };
