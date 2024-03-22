@@ -1,12 +1,22 @@
-import { IUpdateUser, IUserReturn, UserCreate, UserRead, UserReturn } from "../interfaces";
+import {
+  IUpdateUser,
+  IUserReturn,
+  UserCreate,
+  UserRead,
+  UserReturn,
+} from "../interfaces";
 import { User } from "../entities";
 import { userRepository } from "../repositories";
 import { userReadSchema, userReturnSchema, userSchemaUpdate } from "../schemas";
 import { DeepPartial } from "typeorm";
 
-const create = async (
-  payloadUser: any
-): Promise<UserReturn> => {
+const create = async (payloadUser: any): Promise<UserReturn> => {
+  if (payloadUser.address) {
+    if (!payloadUser.address.complement) {
+      payloadUser.address.complement = "";
+    }
+  }
+
   const userCreated: any = userRepository.create(payloadUser);
   await userRepository.save(userCreated);
 
@@ -19,7 +29,9 @@ const read = async (): Promise<UserRead> => {
 };
 
 const retrieve = async (id: number): Promise<IUpdateUser> => {
-  const user: IUserReturn | null = await userRepository.findOne({ where: { id } });
+  const user: IUserReturn | null = await userRepository.findOne({
+    where: { id },
+  });
   return userSchemaUpdate.parse(user);
 };
 
