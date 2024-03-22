@@ -12,7 +12,12 @@ const create = async (payload: CageCreate): Promise<ICageReturn> => {
 };
 
 const readShoppingCentro = async (): Promise<CageRead> => {
-  const cages: ICageReturn[] = await cageRepository.find({where: {location: "Shopping Centro"}});
+  const cages: ICageReturn[] | null = await cageRepository.find({where: {location: "Shopping Centro"}});
+
+  if (cages.length === 0) {
+    return []
+  }
+
   return cageReadSchema.parse(cages);
 };
 

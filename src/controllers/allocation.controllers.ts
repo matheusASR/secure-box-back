@@ -1,9 +1,8 @@
-import { Allocation } from './../entities/Allocation.entity';
 import { Request, Response } from "express";
 import { allocationServices } from "../services";
-import { IAllocationReturn, AllocationCreate, AllocationRead } from "../interfaces";
+import { IAllocationReturn, AllocationRead, ICageReturn } from "../interfaces";
 import { DeepPartial } from "typeorm";
-import { allocationRepository } from "../repositories";
+import { allocationRepository, cageRepository } from "../repositories";
 
 const create = async (req: Request, res: Response): Promise<Response> => {
   const userId: number = Number(res.locals.userID);
@@ -16,6 +15,10 @@ const create = async (req: Request, res: Response): Promise<Response> => {
     finished: false,
     pressed: false
   }
+
+  const cageFound: ICageReturn | null = await cageRepository.findOne({where: {id: cageId}})
+  await cageRepository.save({ ...cageFound, availability: false })
+
   const allocation: any = await allocationServices.create({...restDefault, ...payload, user: userId, cage: cageId});
   return res.status(201).json(allocation);
 };
@@ -32,11 +35,7 @@ const retrieve = async (req: Request, res: Response): Promise<Response> => {
 };
 
 const userNotFinishedAllocations = async (req: Request, res: Response): Promise<Response> => {
-  const userId: number = Number(req.params.userId); // Convertendo para número
-  if (isNaN(userId)) {
-    return res.status(400).json({ error: 'Invalid userId' });
-  }
-
+  const userId: number = Number(req.params.userId);
   const allocations: any = await allocationServices.userNotFinishedAllocations(userId);
   return res.status(200).json(allocations);
 };
@@ -60,4 +59,12 @@ const update = async (req: Request, res: Response): Promise<Response> => {
   return res.status(200).json(allocationUpdated);
 };
 
-export default { create, read, retrieve, userNotFinishedAllocations, update, userFinishedAllocations };
+const destroy = async (req: Request, res: Response): Promise<Response> => {
+  const id: number = Number(req.params.id);
+  const foundallocation: any = await allocationRepository.findOne({ where: { id } });
+  await allocationServices.destroy(foundallocation);
+  return res.status(204).json();
+};
+
+
+export default { create, read, retrieve, userNotFinishedAllocations, update, userFinishedAllocations, destroy };

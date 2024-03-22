@@ -16,11 +16,11 @@ import { Allocation } from "../entities";
 
 const create = async (
   payload: AllocationCreate
-): Promise<IAllocationReturn> => {
+): Promise<any> => {
   const allocationCreated: any = allocationRepository.create(payload);
   await allocationRepository.save(allocationCreated);
 
-  return allocationSchema.parse(allocationCreated);
+  return allocationCreated;
 };
 
 const read = async (): Promise<AllocationRead> => {
@@ -139,4 +139,8 @@ const update = async (
   );
 };
 
-export default { create, read, retrieve, userNotFinishedAllocations, userFinishedAllocations, update };
+const destroy = async (allocation: Allocation): Promise<void> => {
+  await allocationRepository.remove(allocation);
+};
+
+export default { create, read, retrieve, userNotFinishedAllocations, userFinishedAllocations, update, destroy };
