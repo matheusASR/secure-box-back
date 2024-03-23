@@ -30,4 +30,7 @@ export class Allocation {
 
     @Column()
     pressed: boolean;
+
+    @Column()
+    unlocked: boolean;
 }

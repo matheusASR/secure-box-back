@@ -13,7 +13,8 @@ const create = async (req: Request, res: Response): Promise<Response> => {
     price: "null",
     finalDatetime: "null",
     finished: false,
-    pressed: false
+    pressed: false,
+    unlocked: false
   }
 
   const cageFound: ICageReturn | null = await cageRepository.findOne({where: {id: cageId}})
