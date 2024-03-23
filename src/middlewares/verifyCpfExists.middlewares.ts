@@ -11,7 +11,7 @@ export const verifyCpfExists = async (
   const cpf: string = req.body.cpf;
 
   const foundUser: User | null = await userRepository.findOneBy({ cpf });
-  if (foundUser) throw new AppError("Cpf already registered", 409);
+  if (foundUser) throw new AppError("CPF já registrado!", 409);
 
   return next();
 };

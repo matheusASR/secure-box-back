@@ -11,7 +11,7 @@ export const verifyEmailExists = async (
   const email: string = req.body.email;
 
   const foundUser: User | null = await userRepository.findOneBy({ email });
-  if (foundUser) throw new AppError("Email already exists", 409);
+  if (foundUser) throw new AppError("Email já registrado!", 409);
 
   return next();
 };

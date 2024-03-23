@@ -11,7 +11,7 @@ export const verifyCelExists = async (
   const cel: string = req.body.cel;
 
   const foundUser: User | null = await userRepository.findOneBy({ cel });
-  if (foundUser) throw new AppError("Cel already registered", 409);
+  if (foundUser) throw new AppError("Celular já registrado!", 409);
 
   return next();
 };

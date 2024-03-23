@@ -11,7 +11,7 @@ export const verifyCageIdExists = async (
   const id: number = Number(req.params.id);
 
   const foundCage: Cage | null = await cageRepository.findOneBy({ id });
-  if (!foundCage) throw new AppError("cage not found", 404);
+  if (!foundCage) throw new AppError("Gaiola não encontrada!", 404);
 
   res.locals = { ...res.locals, foundCage };
 

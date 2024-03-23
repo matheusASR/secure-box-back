@@ -15,7 +15,7 @@ export class User {
   @Column({ length: 45, unique: true })
   email: string;
 
-  @Column({ length: 45 })
+  @Column({ length: 100 })
   name: string;
 
   @Column({ length: 120 })
@@ -27,7 +27,7 @@ export class User {
   @Column({ length: 11, unique: true })
   cel: string;
 
-  @Column({ type: "date" })
+  @Column({ length: 10 })
   birthdate: string;
 
   @Column({ type: "jsonb" })

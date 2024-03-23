@@ -10,7 +10,7 @@ export const isAccountOwner = async (
 
   if (Number(res.locals.userID) !== id) {
     throw new AppError(
-      "You are not allowed to update or delete this user.",
+      "Você não tem permissão para deletar ou atualizar este usuário!",
       401
     );
   }

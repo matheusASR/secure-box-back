@@ -11,7 +11,7 @@ export const verifyAllocationIdExists = async (
   const id: number = Number(req.params.id);
 
   const foundAllocation: Allocation | null = await allocationRepository.findOneBy({ id });
-  if (!foundAllocation) throw new AppError("Allocation not found", 404);
+  if (!foundAllocation) throw new AppError("Alocação não encontrada!", 404);
 
   res.locals = { ...res.locals, foundAllocation };
 

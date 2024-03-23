@@ -11,7 +11,7 @@ export const verifyIdExists = async (
   const id: number = Number(req.params.id);
 
   const foundUser: User | null = await userRepository.findOneBy({ id });
-  if (!foundUser) throw new AppError("User not found", 404);
+  if (!foundUser) throw new AppError("Usuário não encontrado!", 404);
 
   res.locals = { ...res.locals, foundUser };
 

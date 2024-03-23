@@ -15,7 +15,7 @@ const isAdmin = (req: Request, res: Response, next: NextFunction): void => {
     if (err) throw new AppError(err.message, 401);
     const id = decoded.sub
     const foundUser: User | null = await userRepository.findOneBy({ id });
-    if (foundUser?.admin === false) throw new AppError("Only Admin users!", 403);
+    if (foundUser?.admin === false) throw new AppError("Somente usuários admin!", 403);
   });
 
   return next();

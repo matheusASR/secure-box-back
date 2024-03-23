@@ -10,10 +10,10 @@ const login = async ({
   password,
 }: Login): Promise<LoginReturn> => {
   const foundUser: User | null = await userRepository.findOneBy({ email });
-  if (!foundUser) throw new AppError("Invalid credentials", 401);
+  if (!foundUser) throw new AppError("Email inválido!", 401);
 
   const samePwd: boolean = await compare(password, foundUser.password);
-  if (!samePwd) throw new AppError("Invalid credentials", 401);
+  if (!samePwd) throw new AppError("Senha inválida!", 401);
 
   const token: string = sign(
     { admin: foundUser.admin },
