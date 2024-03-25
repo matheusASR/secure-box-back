@@ -13,6 +13,7 @@ userRouter.post(
   middlewares.verifyEmailExists,
   middlewares.verifyCelExists,
   middlewares.verifyCpfExists,
+  middlewares.validateCpf,
   userControllers.create
 );
 userRouter.get("", userControllers.read);

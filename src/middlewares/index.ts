@@ -9,6 +9,7 @@ import { isAccountOwner } from "./isAccountOwner.middlewares";
 import { isAdmin } from "./isAdmin.middlewares";
 import { verifyAllocationIdExists } from "./verifyAllocationIdExists";
 import { verifyCageIdExists } from "./verifyCageIdExists";
+import { validateCpf } from "./validateCpf.middleware";
 
 export default {
   handleError,
@@ -21,5 +22,6 @@ export default {
   isAccountOwner,
   isAdmin,
   verifyAllocationIdExists,
-  verifyCageIdExists
+  verifyCageIdExists,
+  validateCpf
 };
