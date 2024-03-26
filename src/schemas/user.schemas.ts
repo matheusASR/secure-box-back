@@ -1,4 +1,6 @@
 import { z } from "zod";
+import { addressCreateSchema } from "./address.schemas";
+import { paymentMethodCreateSchema } from "./paymentMethod.schemas";
 
 const userSchema = z.object({
   id: z.number().positive(),
@@ -9,6 +11,19 @@ const userSchema = z.object({
   cel: z.string().max(11),
   birthdate: z.string().max(10),
   admin: z.boolean().default(false),
+});
+
+const userProfileSchema = z.object({
+  id: z.number().positive(),
+  name: z.string().max(100),
+  email: z.string().max(100).email(),
+  password: z.string().max(120),
+  cpf: z.string().max(11),
+  cel: z.string().max(11),
+  birthdate: z.string().max(10),
+  admin: z.boolean().default(false),
+  address: addressCreateSchema,
+  paymentMethods: paymentMethodCreateSchema.array()
 });
 
 const userLoginSchema = z.object({
@@ -31,4 +46,5 @@ export {
   userReadSchema,
   userLoginSchema,
   userSchemaUpdate,
+  userProfileSchema
 };

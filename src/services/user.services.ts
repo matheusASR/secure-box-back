@@ -5,26 +5,30 @@ import {
   UserRead,
   UserReturn,
 } from "../interfaces";
-import { User } from "../entities";
-import { userRepository } from "../repositories";
+import { Address, User } from "../entities";
+import { addressRepository, userRepository } from "../repositories";
 import { userReadSchema, userReturnSchema, userSchemaUpdate } from "../schemas";
 import { DeepPartial } from "typeorm";
 
-const create = async (payloadUser: any): Promise<UserReturn> => {
-  if (payloadUser.address) {
-    if (!payloadUser.address.complement) {
-      payloadUser.address.complement = "";
+const create = async (payloadUser: UserCreate, payloadAddress: any): Promise<UserReturn> => {
+  if (payloadAddress) {
+    if (!payloadAddress.complement) {
+      payloadAddress.complement = "";
     }
   }
 
-  const userCreated: any = userRepository.create(payloadUser);
+  const userCreated: UserReturn = userRepository.create(payloadUser);
   await userRepository.save(userCreated);
+
+  const userId: number = Number(userCreated.id)
+  const addressCreated = addressRepository.create({...payloadAddress, user: userId})
+  await addressRepository.save(addressCreated);
 
   return userReturnSchema.parse(userCreated);
 };
 
 const read = async (): Promise<UserRead> => {
-  const users: IUserReturn[] = await userRepository.find();
+  const users: UserReturn[] = await userRepository.find();
   return userReadSchema.parse(users);
 };
 
@@ -39,6 +43,13 @@ const update = async (
   foundUser: IUserReturn,
   payload: DeepPartial<any>
 ): Promise<IUpdateUser> => {
+  const userID: any = Number(foundUser.id)
+  const userAddress = await addressRepository.findOne({ where: { user: userID } })
+
+  if (payload.address) {
+    await addressRepository.save({...userAddress, ...payload.address})
+  }
+
   return userSchemaUpdate.parse(
     await userRepository.save({ ...foundUser, ...payload })
   );

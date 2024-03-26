@@ -5,6 +5,7 @@ import {
   UserRepo,
   IUserReturn,
   IUpdateUser,
+  UserProfile
 } from "./user.interfaces";
 
 import {
@@ -12,17 +13,26 @@ import {
   AllocationRead,
   AllocationRepo,
   IAllocationReturn,
-  IAllocationNotFinished
-} from "./allocation.interfaces"
+  IAllocationNotFinished,
+} from "./allocation.interfaces";
 
-import {
-  CageCreate,
-  CageRead,
-  CageRepo,
-  ICageReturn,
-} from "./cage.interfaces"
+import { CageCreate, CageRead, CageRepo, ICageReturn } from "./cage.interfaces";
 
 import { Login, LoginReturn } from "./login.interfaces";
+
+import { AddressCreate, AddressRepo, IAddress } from "./address.interfaces";
+
+import {
+  NotificationCreate,
+  NotificationRepo,
+  INotification,
+} from "./notification.interfaces";
+
+import {
+  PaymentMethodCreate,
+  PaymentMethodRepo,
+  IPaymentMethod,
+} from "./paymentMethod.interfaces";
 
 export {
   UserCreate,
@@ -41,5 +51,15 @@ export {
   CageRead,
   CageRepo,
   ICageReturn,
-  IAllocationNotFinished
+  IAllocationNotFinished,
+  AddressCreate,
+  AddressRepo,
+  IAddress,
+  NotificationCreate,
+  NotificationRepo,
+  INotification,
+  PaymentMethodCreate,
+  PaymentMethodRepo,
+  IPaymentMethod,
+  UserProfile
 };

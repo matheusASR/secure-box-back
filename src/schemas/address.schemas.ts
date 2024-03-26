@@ -7,7 +7,7 @@ const addressSchema = z.object({
   city: z.string().max(100),
   state: z.string().max(100),
   complement: z.string().max(255),
-  user: z.any()
+  user: z.number().positive()
 });
 
 const addressCreateSchema = addressSchema.omit({ id: true, user: true });

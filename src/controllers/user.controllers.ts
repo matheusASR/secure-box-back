@@ -4,8 +4,8 @@ import { IUpdateUser, IUserReturn, UserCreate, UserRead, UserReturn } from "../i
 import { DeepPartial } from "typeorm";
 
 const create = async (req: Request, res: Response): Promise<Response> => {
-  const payload: UserCreate = req.body
-  const user: UserReturn = await userServices.create(payload);
+  const { address, ...payload } = req.body; 
+  const user: UserReturn = await userServices.create(payload, address); 
   return res.status(201).json(user);
 };
 

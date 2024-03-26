@@ -21,6 +21,6 @@ export class Address {
   @Column({ nullable: true, length: 255 })
   complement?: string;
 
-  @OneToOne(() => User)
+  @OneToOne(() => User, { onDelete: 'CASCADE' })
   user: User;
 }
