@@ -7,8 +7,6 @@ const allocationSchema = z.object({
   price: z.string().max(10),
   paymentStatus: z.boolean(),
   finished: z.boolean(),
-  pressed: z.boolean(),
-  unlocked: z.boolean(),
   userId: z.number().positive(),
   cageId: z.number().positive(),
 });
@@ -20,9 +18,7 @@ const allocationCreateSchema = allocationSchema.omit({
   userId: true,
   cageId: true,
   paymentStatus: true,
-  pressed: true,
-  finished: true,
-  unlocked: true,
+  finished: true
 });
 const allocationNotFinishedSchema = allocationSchema.omit({
   finalDatetime: true,

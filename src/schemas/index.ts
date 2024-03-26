@@ -9,13 +9,25 @@ import {
 
 import { cageSchema, cageCreateSchema, cageReadSchema } from "./cage.schemas";
 
+import { addressCreateSchema, addressSchema } from "./address.schemas";
+
 import {
   allocationSchema,
   allocationCreateSchema,
   allocationReadSchema,
   allocationNotFinishedSchema,
-  updateReturn
+  updateReturn,
 } from "./allocation.schemas";
+
+import {
+  notificationCreateSchema,
+  notificationSchema,
+} from "./notification.schemas";
+
+import {
+  paymentMethodCreateSchema,
+  paymentMethodSchema,
+} from "./paymentMethod.schemas";
 
 export {
   userSchema,
@@ -31,5 +43,11 @@ export {
   allocationCreateSchema,
   allocationReadSchema,
   allocationNotFinishedSchema,
-  updateReturn
+  updateReturn,
+  addressCreateSchema,
+  addressSchema,
+  paymentMethodCreateSchema,
+  paymentMethodSchema,
+  notificationCreateSchema,
+  notificationSchema,
 };

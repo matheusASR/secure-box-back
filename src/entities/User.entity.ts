@@ -4,14 +4,8 @@ import {
   Column,
   Entity,
   PrimaryGeneratedColumn,
-  OneToMany,
-  OneToOne,
-  JoinColumn,
 } from "typeorm";
 import { getRounds, hashSync } from "bcryptjs";
-import { PaymentMethod } from "./PaymentMethod.entity";
-import { Notification } from "./Notification.entity";
-import { Address } from "./Address.entity";
 
 @Entity("users")
 export class User {
@@ -38,16 +32,6 @@ export class User {
 
   @Column({ default: false })
   admin: boolean;
-
-  @OneToOne(() => Address)
-  @JoinColumn()
-  address: Address;
-
-  @OneToMany(() => PaymentMethod, paymentMethod => paymentMethod.user)
-  paymentMethods: PaymentMethod[];
-
-  @OneToMany(() => Notification, notification => notification.user)
-  notifications: Notification[];
 
   @BeforeInsert()
   @BeforeUpdate()
