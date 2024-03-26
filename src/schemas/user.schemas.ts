@@ -23,7 +23,7 @@ const userProfileSchema = z.object({
   birthdate: z.string().max(10),
   admin: z.boolean().default(false),
   address: addressCreateSchema,
-  paymentMethods: paymentMethodCreateSchema.array()
+  paymentMethod: paymentMethodCreateSchema
 });
 
 const userLoginSchema = z.object({

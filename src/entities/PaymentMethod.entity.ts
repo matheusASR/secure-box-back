@@ -2,9 +2,9 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  ManyToOne,
   BeforeInsert,
   BeforeUpdate,
+  OneToOne,
 } from "typeorm";
 import { User } from "./User.entity";
 import { hashSync, getRounds } from "bcryptjs";
@@ -14,7 +14,7 @@ export class PaymentMethod {
   @PrimaryGeneratedColumn("increment")
   id: number;
 
-  @ManyToOne(() => User)
+  @OneToOne(() => User, { onDelete: 'CASCADE' })
   user: User;
 
   @Column({ length: 100 })
@@ -31,9 +31,6 @@ export class PaymentMethod {
 
   @Column({ length: 100 })
   cardType: string;
-
-  @Column({ default: false })
-  isDefault: boolean;
 
   @BeforeInsert()
   @BeforeUpdate()

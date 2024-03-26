@@ -6,13 +6,15 @@ const retrieve = async (id: any): Promise<UserProfile> => {
   const user: IUserReturn | null = await userRepository.findOne({ where: { id } });
   const userResponse = userReturnSchema.parse(user)
   const userAddress = await addressRepository.findOne({where: {user: id}})
-  const userPaymentMethods = await paymentMethodRepository.find({where: {user: id}})
+  const userPaymentMethod = await paymentMethodRepository.findOne({where: {user: id}})
   const response = {
     ...userResponse,
     address: {
       ...userAddress
     },
-    paymentMethods: userPaymentMethods
+    paymentMethods: {
+      ...userPaymentMethod
+    }
   }
 
   return userProfileSchema.parse(response);

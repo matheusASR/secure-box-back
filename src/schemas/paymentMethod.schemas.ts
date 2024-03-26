@@ -7,7 +7,6 @@ const paymentMethodSchema = z.object({
   expirationDate: z.string().max(5),
   cvv: z.string().max(3),
   cardType: z.string().max(100),
-  isDefault: z.boolean().default(false),
   user: z.any()
 });
 
