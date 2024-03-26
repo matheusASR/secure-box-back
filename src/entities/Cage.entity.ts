@@ -10,4 +10,7 @@ export class Cage {
 
   @Column({ default: true })
   availability: boolean;
+
+  @Column({ default: false })
+  open: boolean;
 }

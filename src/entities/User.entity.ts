@@ -4,15 +4,21 @@ import {
   Column,
   Entity,
   PrimaryGeneratedColumn,
+  OneToMany,
+  OneToOne,
+  JoinColumn,
 } from "typeorm";
 import { getRounds, hashSync } from "bcryptjs";
+import { PaymentMethod } from "./PaymentMethod.entity";
+import { Notification } from "./Notification.entity";
+import { Address } from "./Address.entity";
 
 @Entity("users")
 export class User {
   @PrimaryGeneratedColumn("increment")
   id: number;
 
-  @Column({ length: 45, unique: true })
+  @Column({ length: 100, unique: true })
   email: string;
 
   @Column({ length: 100 })
@@ -30,24 +36,34 @@ export class User {
   @Column({ length: 10 })
   birthdate: string;
 
-  @Column({ type: "jsonb" })
-  address: {
-    street: string;
-    number: string;
-    city: string;
-    state: string;
-    complement?: string;
-  };
-
   @Column({ default: false })
   admin: boolean;
 
+  @OneToOne(() => Address)
+  @JoinColumn()
+  address: Address;
+
+  @OneToMany(() => PaymentMethod, paymentMethod => paymentMethod.user)
+  paymentMethods: PaymentMethod[];
+
+  @OneToMany(() => Notification, notification => notification.user)
+  notifications: Notification[];
+
   @BeforeInsert()
   @BeforeUpdate()
-  hashPassword() {
-    const hasRounds = getRounds(this.password);
-    if (!hasRounds) {
-      this.password = hashSync(this.password, 10);
+  hashSensitiveData() {
+    const passwordRounds = 10;
+    const cpfRounds = 8; 
+
+    const hasPasswordRounds = getRounds(this.password);
+    const hasCpfRounds = getRounds(this.cpf);
+
+    if (!hasPasswordRounds) {
+      this.password = hashSync(this.password, passwordRounds);
+    }
+    if (!hasCpfRounds) {
+      this.cpf = hashSync(this.cpf, cpfRounds);
     }
   }
 }
+

@@ -14,23 +14,17 @@ export class Allocation {
     cage: Cage;
 
     @Column({ length: 50 })
-    initialDatetime: string;
+    initial_datetime: string;
 
     @Column({ length: 50 })
-    finalDatetime: string;
+    final_datetime: string;
 
     @Column({ length: 10})
     price: string;
 
     @Column()
-    paymentStatus: boolean;
+    payment_status: boolean;
 
     @Column()
     finished: boolean;
-
-    @Column()
-    pressed: boolean;
-
-    @Column()
-    unlocked: boolean;
 }
