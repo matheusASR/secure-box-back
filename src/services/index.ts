@@ -4,6 +4,8 @@ import cageServices from "./cage.services";
 import profileServices from "./profile.services";
 import allocationServices from "./allocation.services";
 import paymentMethodServices from "./paymentMethod.services";
+import paymentServices from "./payment.services";
+import walletServices from "./wallet.services";
 
 export {
     loginServices,
@@ -11,5 +13,7 @@ export {
     cageServices,
     profileServices,
     allocationServices,
-    paymentMethodServices
+    paymentMethodServices,
+    paymentServices,
+    walletServices
 }

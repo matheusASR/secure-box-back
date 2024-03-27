@@ -7,7 +7,7 @@ import {
   userSchemaUpdate,
   userProfileSchema,
   userAddressSchema,
-  userSchemaWid
+  userSchemaWid,
 } from "./user.schemas";
 
 import { cageSchema, cageCreateSchema, cageReadSchema } from "./cage.schemas";
@@ -30,10 +30,14 @@ import {
 import {
   paymentMethodCreateSchema,
   paymentMethodSchema,
-  paymentMethodUpdateSchema
+  paymentMethodUpdateSchema,
 } from "./paymentMethod.schemas";
 
-import { paymentCreateSchema, paymentSchema } from "./payments.schemas";
+import {
+  paymentCreateSchema,
+  paymentSchema,
+  paymentWid,
+} from "./payments.schemas";
 
 import { walletCreateSchema, walletSchema } from "./wallet.schemas";
 
@@ -65,5 +69,6 @@ export {
   walletCreateSchema,
   walletSchema,
   userSchemaWid,
-  paymentMethodUpdateSchema
+  paymentMethodUpdateSchema,
+  paymentWid,
 };

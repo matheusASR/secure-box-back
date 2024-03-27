@@ -4,6 +4,8 @@ import cageControllers from "./cage.controllers";
 import profileControllers from "./profile.controllers";
 import allocationControllers from "./allocation.controllers";
 import paymentMethodControllers from "./paymentMethod.controllers";
+import paymentControllers from "./payment.controllers";
+import walletControllers from "./wallet.controllers";
 
 export {
     loginControllers,
@@ -11,5 +13,7 @@ export {
     cageControllers,
     profileControllers,
     allocationControllers,
-    paymentMethodControllers
+    paymentMethodControllers,
+    paymentControllers,
+    walletControllers
 }

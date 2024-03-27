@@ -9,8 +9,10 @@ const paymentSchema = z.object({
 });
 
 const paymentCreateSchema = paymentSchema.omit({ id: true, user: true });
+const paymentWid = paymentSchema.omit({ id: true });
 
 export {
   paymentSchema,
   paymentCreateSchema,
+  paymentWid
 };

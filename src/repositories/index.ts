@@ -4,6 +4,8 @@ import userRepository from "./user.repository";
 import notificationRepository from "./notification.repository";
 import addressRepository from "./address.repository";
 import paymentMethodRepository from "./paymentMethod.repository";
+import paymentRepository from "./payment.repository";
+import walletRepository from "./wallet.repository";
 
 export {
     cageRepository,
@@ -11,5 +13,7 @@ export {
     userRepository,
     notificationRepository,
     addressRepository,
-    paymentMethodRepository
+    paymentMethodRepository,
+    paymentRepository,
+    walletRepository
 }

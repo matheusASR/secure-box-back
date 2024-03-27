@@ -3,6 +3,8 @@ import { loginRouter } from "./login.routers";
 import { cageRouter } from "./cage.routers";
 import { profileRouter } from "./profile.routers";
 import { allocationRouter } from "./allocation.routers";
+import { paymentMethodRouter } from "./paymentMethod.routers";
+import { paymentRouter } from "./payment.routers";
 
 export {
   userRouter,
@@ -10,4 +12,6 @@ export {
   cageRouter,
   profileRouter,
   allocationRouter,
+  paymentMethodRouter,
+  paymentRouter
 };
