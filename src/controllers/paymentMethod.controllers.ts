@@ -1,23 +1,39 @@
 import { Request, Response } from "express";
 import { paymentMethodServices } from "../services";
-import { IPaymentMethod, PaymentMethodCreate } from "../interfaces";
+import { IPaymentMethod, PaymentMethodCreate, PaymentMethodUpdate } from "../interfaces";
 import { paymentMethodRepository } from "../repositories";
 
 const create = async (req: Request, res: Response): Promise<Response> => {
-  const payload: PaymentMethodCreate = req.body;
-  const paymentMethod: IPaymentMethod = await paymentMethodServices.create(
-    payload
-  );
+  const userId = Number(req.params.userId);
+  const payload = req.body;
+
+  const userPaymentMethods = await paymentMethodRepository.find({ where: { user: { id: userId } } });
+
+  if (!userPaymentMethods || userPaymentMethods.length === 0) {
+    payload.isDefault = true;
+  } else {
+    payload.isDefault = false; 
+  }
+
+  const paymentMethod: IPaymentMethod = await paymentMethodServices.create(payload, userId);
   return res.status(201).json(paymentMethod);
 };
 
+const update = async (req: Request, res: Response): Promise<Response> => {
+  const payload: PaymentMethodUpdate = req.body;
+  const foundPaymentMethod = res.locals.foundPaymentMethod;
+
+  const paymentMethodUpdated = await paymentMethodServices.update(foundPaymentMethod, payload);
+
+  return res.status(200).json(paymentMethodUpdated);
+};
+
+
 const destroy = async (req: Request, res: Response): Promise<Response> => {
-  const userId = res.locals.userID;
-  const paymentMethod: any = paymentMethodRepository.findOne({
-    where: { user: userId },
-  });
+  const id = Number(req.params.id);
+  const paymentMethod: any = paymentMethodRepository.findOne({ where: { id },});
   await paymentMethodServices.destroy(paymentMethod);
   return res.status(204).json();
 };
 
-export default { create, destroy };
+export default { create, update, destroy };

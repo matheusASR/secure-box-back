@@ -7,13 +7,16 @@ const paymentMethodSchema = z.object({
   expirationDate: z.string().max(5),
   cvv: z.string().max(3),
   cardType: z.string().max(100),
-  isDefault: z.boolean(),
   user: z.any()
 });
 
+const paymentMethodUpdateSchema = z.object({
+  isDefault: z.boolean()
+})
 const paymentMethodCreateSchema = paymentMethodSchema.omit({ id: true, user: true });
 
 export {
   paymentMethodSchema,
   paymentMethodCreateSchema,
+  paymentMethodUpdateSchema
 };

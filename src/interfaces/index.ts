@@ -32,6 +32,7 @@ import {
 import {
   PaymentMethodCreate,
   PaymentMethodRepo,
+  PaymentMethodUpdate,
   IPaymentMethod,
 } from "./paymentMethod.interfaces";
 
@@ -73,5 +74,6 @@ export {
   PaymentCreate,
   PaymentRepo,
   IPayment,
-  UserWid
+  UserWid,
+  PaymentMethodUpdate
 };

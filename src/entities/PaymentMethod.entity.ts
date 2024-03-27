@@ -32,6 +32,9 @@ export class PaymentMethod {
   @Column({ length: 100 })
   cardType: string;
 
+  @Column()
+  isDefault: boolean;
+
   @BeforeInsert()
   @BeforeUpdate()
   hashSensitiveData() {

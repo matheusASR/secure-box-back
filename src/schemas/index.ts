@@ -30,6 +30,7 @@ import {
 import {
   paymentMethodCreateSchema,
   paymentMethodSchema,
+  paymentMethodUpdateSchema
 } from "./paymentMethod.schemas";
 
 import { paymentCreateSchema, paymentSchema } from "./payments.schemas";
@@ -63,5 +64,6 @@ export {
   paymentSchema,
   walletCreateSchema,
   walletSchema,
-  userSchemaWid
+  userSchemaWid,
+  paymentMethodUpdateSchema
 };

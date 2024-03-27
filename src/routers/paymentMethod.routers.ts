@@ -5,12 +5,21 @@ import { paymentMethodControllers } from "../controllers";
 
 export const paymentMethodRouter: Router = Router();
 
-paymentMethodRouter.use("/:id", middlewares.verifyIdExists);
-
 paymentMethodRouter.post(
-  "/:id",
+  "/:userId",
+  middlewares.verifyIdExists,
   middlewares.validateBody(paymentMethodCreateSchema),
   middlewares.verifyToken,
   paymentMethodControllers.create
 );
-paymentMethodRouter.delete("/:id", middlewares.verifyToken, middlewares.isAccountOwner, paymentMethodControllers.destroy);
+paymentMethodRouter.patch(
+  "/:id",
+  middlewares.verifyToken,
+  paymentMethodControllers.update
+);
+paymentMethodRouter.delete(
+  "/:id",
+  middlewares.verifyPaymentMethodExists,
+  middlewares.verifyToken,
+  paymentMethodControllers.destroy
+);

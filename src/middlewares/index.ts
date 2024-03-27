@@ -10,6 +10,7 @@ import { isAdmin } from "./isAdmin.middlewares";
 import { verifyAllocationIdExists } from "./verifyAllocationIdExists";
 import { verifyCageIdExists } from "./verifyCageIdExists";
 import { validateCpf } from "./validateCpf.middleware";
+import { verifyPaymentMethodExists } from "./verifyPaymentMethodExists";
 
 export default {
   handleError,
@@ -23,5 +24,6 @@ export default {
   isAdmin,
   verifyAllocationIdExists,
   verifyCageIdExists,
-  validateCpf
+  validateCpf,
+  verifyPaymentMethodExists
 };
