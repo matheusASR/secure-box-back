@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from "typeorm";
 import { User } from "./User.entity";
 
-@Entity("addresses")
+@Entity("adresses")
 export class Address {
   @PrimaryGeneratedColumn("increment")
   id: number;
@@ -18,10 +18,13 @@ export class Address {
   @Column({ length: 100 })
   state: string;
 
+  @Column({ length: 20 })
+  zipCode: string;
+
   @Column({ nullable: true, length: 255 })
   complement?: string;
 
   @OneToOne(() => User, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: "user_id" })
+  @JoinColumn()
   user: User;
 }

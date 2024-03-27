@@ -22,9 +22,9 @@ export class Allocation {
     @Column({ length: 10})
     price: string;
 
-    @Column()
+    @Column({ default: false })
     paymentStatus: boolean;
 
-    @Column()
+    @Column({ default: false })
     finished: boolean;
 }

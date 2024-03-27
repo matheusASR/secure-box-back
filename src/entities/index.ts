@@ -4,6 +4,8 @@ import { User } from "./User.entity";
 import { Address } from "./Address.entity";
 import { Notification } from "./Notification.entity";
 import { PaymentMethod } from "./PaymentMethod.entity";
+import { Payment } from "./Payment.entity";
+import { Wallet } from "./Wallet.entity";
 
 export {
     Allocation,
@@ -11,5 +13,7 @@ export {
     User,
     Address,
     Notification,
-    PaymentMethod
+    PaymentMethod,
+    Payment,
+    Wallet
 }
