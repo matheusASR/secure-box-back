@@ -5,7 +5,7 @@ import {
   UserRepo,
   IUserReturn,
   IUpdateUser,
-  UserProfile
+  UserProfile,
 } from "./user.interfaces";
 
 import {
@@ -34,6 +34,10 @@ import {
   IPaymentMethod,
 } from "./paymentMethod.interfaces";
 
+import { PaymentCreate, PaymentRepo, IPayment } from "./payment.interfaces";
+
+import { WalletCreate, WalletRepo, IWallet } from "./wallet.interfaces";
+
 export {
   UserCreate,
   UserRead,
@@ -61,5 +65,11 @@ export {
   PaymentMethodCreate,
   PaymentMethodRepo,
   IPaymentMethod,
-  UserProfile
+  UserProfile,
+  WalletCreate,
+  WalletRepo,
+  IWallet,
+  PaymentCreate,
+  PaymentRepo,
+  IPayment,
 };

@@ -7,6 +7,7 @@ const addressSchema = z.object({
   city: z.string().max(100),
   state: z.string().max(100),
   complement: z.string().max(255),
+  zipCode: z.string().max(20),
   user: z.number().positive()
 });
 
