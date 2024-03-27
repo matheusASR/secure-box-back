@@ -39,6 +39,7 @@ const userReturnSchema = userSchema.omit({
 });
 const userReadSchema = userReturnSchema.array();
 const userSchemaUpdate = userSchema.omit({ password: true, admin: true });
+const userAddressSchema = userProfileSchema.omit({ paymentMethod: true });
 export {
   userSchema,
   userCreateSchema,
@@ -46,5 +47,6 @@ export {
   userReadSchema,
   userLoginSchema,
   userSchemaUpdate,
-  userProfileSchema
+  userProfileSchema,
+  userAddressSchema
 };

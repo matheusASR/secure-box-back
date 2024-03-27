@@ -5,12 +5,13 @@ import {
   userReadSchema,
   userLoginSchema,
   userSchemaUpdate,
-  userProfileSchema
+  userProfileSchema,
+  userAddressSchema
 } from "./user.schemas";
 
 import { cageSchema, cageCreateSchema, cageReadSchema } from "./cage.schemas";
 
-import { addressCreateSchema, addressSchema, } from "./address.schemas";
+import { addressCreateSchema, addressSchema } from "./address.schemas";
 
 import {
   allocationSchema,
@@ -51,5 +52,6 @@ export {
   paymentMethodSchema,
   notificationCreateSchema,
   notificationSchema,
-  userProfileSchema
+  userProfileSchema,
+  userAddressSchema
 };

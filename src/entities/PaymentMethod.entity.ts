@@ -4,7 +4,7 @@ import {
   Column,
   BeforeInsert,
   BeforeUpdate,
-  OneToOne,
+  ManyToOne,
 } from "typeorm";
 import { User } from "./User.entity";
 import { hashSync, getRounds } from "bcryptjs";
@@ -14,10 +14,10 @@ export class PaymentMethod {
   @PrimaryGeneratedColumn("increment")
   id: number;
 
-  @OneToOne(() => User, { onDelete: 'CASCADE' })
+  @ManyToOne(() => User, { onDelete: 'CASCADE' })
   user: User;
 
-  @Column({ length: 100 })
+  @Column({ length: 120 })
   cardNumber: string;
 
   @Column({ length: 100 })
@@ -26,7 +26,7 @@ export class PaymentMethod {
   @Column({ length: 5 })
   expirationDate: string;
 
-  @Column({ length: 3 })
+  @Column({ length: 120 })
   cvv: string;
 
   @Column({ length: 100 })
