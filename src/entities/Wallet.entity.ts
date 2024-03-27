@@ -14,6 +14,6 @@ export class Wallet {
   @Column({ type: "decimal" })
   balance: number; 
 
-  @OneToOne(() => User) 
+  @OneToOne(() => User, { onDelete: 'CASCADE' }) 
   user: User;
 }

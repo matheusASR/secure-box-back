@@ -10,6 +10,7 @@ import { User } from "../entities";
 import { addressRepository, userRepository } from "../repositories";
 import { userReadSchema, userReturnSchema, userSchemaUpdate } from "../schemas";
 import { DeepPartial } from "typeorm";
+import walletRepository from "../repositories/wallet.repository";
 
 const create = async (
   payloadUser: UserWid,
@@ -19,11 +20,18 @@ const create = async (
   await userRepository.save(userCreated);
 
   const userId: any = Number(userCreated.id);
+
   const addressCreated = addressRepository.create({
     ...payloadAddress,
     user: userId
   });
   await addressRepository.save(addressCreated);
+
+  const walletCreated = walletRepository.create({
+    balance: parseFloat("0"),
+    user: userId
+  })
+  await walletRepository.save(walletCreated);
 
   return userReturnSchema.parse(userCreated);
 };

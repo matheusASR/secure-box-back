@@ -11,7 +11,7 @@ export class Notification {
   @PrimaryGeneratedColumn("increment")
   id: number;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, { onDelete: 'CASCADE' })
   user: User;
 
   @Column({ length: 100 })

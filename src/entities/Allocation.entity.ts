@@ -7,10 +7,10 @@ export class Allocation {
     @PrimaryGeneratedColumn("increment")
     id: number;
 
-    @ManyToOne(() => User)
+    @ManyToOne(() => User, { onDelete: 'CASCADE' })
     user: User;
 
-    @ManyToOne(() => Cage)
+    @ManyToOne(() => Cage, { onDelete: 'CASCADE' })
     cage: Cage;
 
     @Column({ length: 50 })

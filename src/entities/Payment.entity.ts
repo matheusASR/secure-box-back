@@ -20,6 +20,6 @@ export class Payment {
   @Column({ length: 255 })
   type: string;
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User, { onDelete: 'CASCADE' })
   user: User;
 }
