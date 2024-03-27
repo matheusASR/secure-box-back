@@ -1,5 +1,6 @@
 import { paymentRepository, walletRepository } from "../repositories";
 import { paymentSchema } from "../schemas";
+import { paymentReadSchema } from "../schemas/payments.schemas";
 
 const create = async (payload: any): Promise<any> => {
   const paymentPrice = payload.price;
@@ -17,4 +18,9 @@ const create = async (payload: any): Promise<any> => {
   return paymentSchema.parse(paymentCreated);
 };
 
-export default { create };
+const retrieveUserPayments = async (userId: any): Promise<any> => {
+  const userPayments = await paymentRepository.find({where: {user: {id: userId}}})
+  return paymentReadSchema.parse(userPayments);
+};
+
+export default { create, retrieveUserPayments };

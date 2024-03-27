@@ -12,3 +12,11 @@ paymentRouter.post(
   middlewares.verifyToken,
   paymentControllers.create
 );
+
+paymentRouter.get(
+  "/:userId",
+  middlewares.verifyIdExists,
+//   middlewares.validateBody(paymentCreateSchema),
+  middlewares.verifyToken,
+  paymentControllers.retrieveUserPayments
+);

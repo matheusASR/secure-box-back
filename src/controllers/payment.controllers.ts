@@ -12,4 +12,10 @@ const create = async (req: Request, res: Response): Promise<Response> => {
   return res.status(200).json(paymentPayload);
 };
 
-export default { create };
+const retrieveUserPayments = async (req: Request, res: Response): Promise<Response> => {
+  const userId = Number(req.params.userId);
+  const userPayments: any = await paymentServices.retrieveUserPayments(userId);
+  return res.status(200).json(userPayments);
+};
+
+export default { create, retrieveUserPayments };

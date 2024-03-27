@@ -8,11 +8,13 @@ const paymentSchema = z.object({
   user: z.any()
 });
 
+const paymentReadSchema = paymentSchema.array()
 const paymentCreateSchema = paymentSchema.omit({ id: true, user: true });
 const paymentWid = paymentSchema.omit({ id: true });
 
 export {
   paymentSchema,
   paymentCreateSchema,
-  paymentWid
+  paymentWid,
+  paymentReadSchema
 };
