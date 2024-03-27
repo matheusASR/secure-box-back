@@ -9,6 +9,7 @@ userRouter.use("/:id", middlewares.verifyIdExists);
 
 userRouter.post(
   "",
+  middlewares.validateBody(userCreateSchema),
   middlewares.verifyEmailExists,
   middlewares.verifyCelExists,
   middlewares.verifyCpfExists,
@@ -18,4 +19,4 @@ userRouter.post(
 userRouter.get("", userControllers.read);
 userRouter.get("/:id", userControllers.retrieve);
 userRouter.patch("/:id", middlewares.verifyToken, middlewares.isAccountOwner, userControllers.update);
-userRouter.delete("/:id", userControllers.destroy);
+userRouter.delete("/:id", middlewares.verifyToken, middlewares.isAccountOwner, userControllers.destroy);

@@ -7,6 +7,7 @@ import {
   userSchemaUpdate,
   userProfileSchema,
   userAddressSchema,
+  userSchemaWid
 } from "./user.schemas";
 
 import { cageSchema, cageCreateSchema, cageReadSchema } from "./cage.schemas";
@@ -62,4 +63,5 @@ export {
   paymentSchema,
   walletCreateSchema,
   walletSchema,
+  userSchemaWid
 };

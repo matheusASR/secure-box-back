@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { IUpdateUser, UserProfile } from "../interfaces";
+import { UserProfile } from "../interfaces";
 import { profileServices } from "../services";
 
 const retrieve = async (req: Request, res: Response): Promise<Response> => {

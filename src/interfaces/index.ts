@@ -6,6 +6,7 @@ import {
   IUserReturn,
   IUpdateUser,
   UserProfile,
+  UserWid
 } from "./user.interfaces";
 
 import {
@@ -72,4 +73,5 @@ export {
   PaymentCreate,
   PaymentRepo,
   IPayment,
+  UserWid
 };

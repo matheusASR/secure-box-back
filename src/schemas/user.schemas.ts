@@ -13,6 +13,18 @@ const userSchema = z.object({
   admin: z.boolean().default(false),
 });
 
+const userAddressSchema = z.object({
+  id: z.number().positive(),
+  name: z.string().max(100),
+  email: z.string().max(100).email(),
+  password: z.string().max(120),
+  cpf: z.string().max(11),
+  cel: z.string().max(11),
+  birthdate: z.string().max(10),
+  admin: z.boolean().default(false),
+  address: addressCreateSchema,
+})
+
 const userProfileSchema = z.object({
   id: z.number().positive(),
   name: z.string().max(100),
@@ -31,15 +43,16 @@ const userLoginSchema = z.object({
   password: z.string().max(120),
 });
 
-const userCreateSchema = userSchema.omit({ id: true });
+const userCreateSchema = userAddressSchema.omit({ id: true });
 const userReturnSchema = userSchema.omit({
   password: true,
   admin: true,
   cpf: true
 });
+const userSchemaWid = userSchema.omit({ id: true })
 const userReadSchema = userReturnSchema.array();
-const userSchemaUpdate = userSchema.omit({ password: true, admin: true });
-const userAddressSchema = userProfileSchema.omit({ paymentMethod: true });
+const userSchemaUpdate = userAddressSchema.omit({ password: true, admin: true });
+
 export {
   userSchema,
   userCreateSchema,
@@ -48,5 +61,6 @@ export {
   userLoginSchema,
   userSchemaUpdate,
   userProfileSchema,
-  userAddressSchema
+  userAddressSchema,
+  userSchemaWid
 };

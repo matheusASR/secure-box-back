@@ -7,8 +7,8 @@ const allocationSchema = z.object({
   price: z.string().max(10),
   paymentStatus: z.boolean(),
   finished: z.boolean(),
-  userId: z.number().positive(),
-  cageId: z.number().positive(),
+  userId: z.any(),
+  cageId: z.any(),
 });
 
 const allocationCreateSchema = allocationSchema.omit({

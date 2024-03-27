@@ -1,19 +1,12 @@
 import { Request, Response } from "express";
 import { userServices } from "../services";
-import { AddressCreate, IUpdateUser, IUserReturn, UserCreate, UserRead, UserReturn } from "../interfaces";
+import { AddressCreate, IUpdateUser, IUserReturn, UserCreate, UserRead, UserReturn, UserWid } from "../interfaces";
 import { DeepPartial } from "typeorm";
 
 const create = async (req: Request, res: Response): Promise<Response> => {
   const payload = req.body;
-  const payloadAddress: AddressCreate = {
-    street: payload.address.street,
-    number: payload.address.number,
-    city: payload.address.city,
-    state: payload.address.state,
-    complement: payload.address.complement
-  }
-  
-  const payloadUser: UserCreate = {
+  const payloadAddress: AddressCreate = payload.address
+  const payloadUser: UserWid = {
     name: payload.name,
     email: payload.email,
     cpf: payload.cpf,
@@ -41,7 +34,7 @@ const update = async (req: Request, res: Response): Promise<Response> => {
   const payload: DeepPartial<IUpdateUser> = req.body;
   const foundUser: IUserReturn = res.locals.foundUser;
 
-  const userUpdated: IUpdateUser = await userServices.update(foundUser, payload);
+  const userUpdated = await userServices.update(foundUser, payload);
 
   return res.status(200).json(userUpdated);
 };

@@ -2,24 +2,24 @@ import {
   AddressCreate,
   IUpdateUser,
   IUserReturn,
-  UserCreate,
   UserRead,
   UserReturn,
+  UserWid,
 } from "../interfaces";
-import { Address, User } from "../entities";
+import { User } from "../entities";
 import { addressRepository, userRepository } from "../repositories";
 import { userReadSchema, userReturnSchema, userSchemaUpdate } from "../schemas";
 import { DeepPartial } from "typeorm";
 
 const create = async (
-  payloadUser: UserCreate,
-  payloadAddress: any
+  payloadUser: UserWid,
+  payloadAddress: AddressCreate
 ): Promise<UserReturn> => {
   const userCreated: UserReturn = userRepository.create(payloadUser);
   await userRepository.save(userCreated);
 
   const userId: any = Number(userCreated.id);
-  const addressCreated: any = addressRepository.create({
+  const addressCreated = addressRepository.create({
     ...payloadAddress,
     user: userId
   });
@@ -42,20 +42,23 @@ const retrieve = async (id: number): Promise<IUpdateUser> => {
 
 const update = async (
   foundUser: IUserReturn,
-  payload: DeepPartial<any>
-): Promise<IUpdateUser> => {
+  payload: DeepPartial<IUpdateUser>
+): Promise<any> => {
   const userID: any = Number(foundUser.id);
   const userAddress = await addressRepository.findOne({
-    where: { user: userID },
+    where: { user: {id: userID} }
   });
 
   if (payload.address) {
     await addressRepository.save({ ...userAddress, ...payload.address });
   }
 
-  return userSchemaUpdate.parse(
-    await userRepository.save({ ...foundUser, ...payload })
-  );
+  await userRepository.save({ ...foundUser, ...payload })
+
+  return {
+    ...foundUser,
+    address: {...userAddress}
+  }
 };
 
 const destroy = async (user: User): Promise<void> => {
