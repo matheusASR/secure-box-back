@@ -33,9 +33,9 @@ const retrieve = async (req: Request, res: Response): Promise<Response> => {
   return res.status(200).json(allocation);
 };
 
-const userNotFinishedAllocations = async (req: Request, res: Response): Promise<Response> => {
+const userInUseAllocations = async (req: Request, res: Response): Promise<Response> => {
   const userId: number = Number(req.params.userId);
-  const allocations: any = await allocationServices.userNotFinishedAllocations(userId);
+  const allocations: any = await allocationServices.userInUseAllocations(userId);
   return res.status(200).json(allocations);
 };
 
@@ -66,4 +66,4 @@ const destroy = async (req: Request, res: Response): Promise<Response> => {
 };
 
 
-export default { create, read, retrieve, userNotFinishedAllocations, update, userFinishedAllocations, destroy };
+export default { create, read, retrieve, userInUseAllocations, update, userFinishedAllocations, destroy };

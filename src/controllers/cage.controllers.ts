@@ -10,8 +10,9 @@ const create = async (req: Request, res: Response): Promise<Response> => {
   return res.status(201).json(user);
 };
 
-const readShoppingCentro = async (req: Request, res: Response): Promise<Response> => {
-  const cages: CageRead = await cageServices.readShoppingCentro();
+const read = async (req: Request, res: Response): Promise<Response> => {
+  const location: string = req.params.location;
+  const cages: CageRead = await cageServices.read(location);
   return res.status(200).json(cages);
 };
 
@@ -24,9 +25,7 @@ const retrieve = async (req: Request, res: Response): Promise<Response> => {
 const update = async (req: Request, res: Response): Promise<Response> => {
   const id: number = Number(req.params.id);
   const payload: DeepPartial<ICageReturn> = req.body;
-  const foundCage: any = await cageRepository.findOne({ where: { id } });
-    ////////////////////////////
-
+  const foundCage: ICageReturn | null = await cageRepository.findOne({ where: { id } });
   const cageUpdated: ICageReturn = await cageServices.update(foundCage, payload);
 
   return res.status(200).json(cageUpdated);
@@ -40,4 +39,4 @@ const destroy = async (req: Request, res: Response): Promise<Response> => {
 };
 
 
-export default { create, readShoppingCentro, retrieve, update, destroy };
+export default { create, read, retrieve, update, destroy };

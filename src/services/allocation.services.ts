@@ -2,11 +2,9 @@ import {
   AllocationCreate,
   AllocationRead,
   IAllocationReturn,
-  IAllocationNotFinished,
 } from "../interfaces";
 import { allocationRepository } from "../repositories";
 import {
-  allocationNotFinishedSchema,
   allocationReadSchema,
   allocationSchema,
   updateReturn,
@@ -73,14 +71,14 @@ const retrieve = async (id: number): Promise<IAllocationReturn> => {
   return allocationSchema.parse(allocationFormatted);
 };
 
-const userNotFinishedAllocations = async (userId: number): Promise<any> => {
+const userInUseAllocations = async (userId: number): Promise<any> => {
   const allocations: any = await allocationRepository.find({
     where: { user: { id: userId }, finished: false },
-    relations: ["user", "cage"] // Certifique-se de carregar as relações necessárias
+    relations: ["user", "cage"] 
   });
 
   if (!allocations || allocations.length === 0) {
-    return []; // Retorna um array vazio se não houver alocações associadas ao usuário
+    return []; 
   }
 
   const allocationRead = allocations.map(
@@ -91,8 +89,8 @@ const userNotFinishedAllocations = async (userId: number): Promise<any> => {
       price: allocation.price,
       paymentStatus: allocation.paymentStatus,
       finished: allocation.finished,
-      userId: allocation.user ? allocation.user.id : null, // Verifica se o usuário está definido antes de acessar o ID
-      cageId: allocation.cage ? allocation.cage.id : null, // Verifica se a gaiola está definida antes de acessar o ID
+      userId: allocation.user ? allocation.user.id : null, 
+      cageId: allocation.cage ? allocation.cage.id : null, 
     })
   );
 
@@ -102,11 +100,11 @@ const userNotFinishedAllocations = async (userId: number): Promise<any> => {
 const userFinishedAllocations = async (userId: number): Promise<any> => {
   const allocations: any = await allocationRepository.find({
     where: { user: { id: userId }, finished: true },
-    relations: ["user", "cage"] // Certifique-se de carregar as relações necessárias
+    relations: ["user", "cage"] 
   });
 
   if (!allocations || allocations.length === 0) {
-    return []; // Retorna um array vazio se não houver alocações associadas ao usuário
+    return []; 
   }
 
   const allocationRead = allocations.map(
@@ -117,8 +115,8 @@ const userFinishedAllocations = async (userId: number): Promise<any> => {
       price: allocation.price,
       paymentStatus: allocation.paymentStatus,
       finished: allocation.finished,
-      userId: allocation.user ? allocation.user.id : null, // Verifica se o usuário está definido antes de acessar o ID
-      cageId: allocation.cage ? allocation.cage.id : null, // Verifica se a gaiola está definida antes de acessar o ID
+      userId: allocation.user ? allocation.user.id : null,
+      cageId: allocation.cage ? allocation.cage.id : null, 
     })
   );
 
@@ -138,4 +136,4 @@ const destroy = async (allocation: Allocation): Promise<void> => {
   await allocationRepository.remove(allocation);
 };
 
-export default { create, read, retrieve, userNotFinishedAllocations, userFinishedAllocations, update, destroy };
+export default { create, read, retrieve, userInUseAllocations, userFinishedAllocations, update, destroy };

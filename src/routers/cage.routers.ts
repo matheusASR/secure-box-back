@@ -13,7 +13,7 @@ cageRouter.post(
   middlewares.isAdmin,
   cageControllers.create
 );
-cageRouter.get("", cageControllers.readShoppingCentro);
+cageRouter.get("/:location", cageControllers.read);
 cageRouter.get("/:id", cageControllers.retrieve);
-cageRouter.patch("/:id", cageControllers.update);
+cageRouter.patch("/:id", middlewares.verifyToken, cageControllers.update);
 cageRouter.delete("/:id", middlewares.isAdmin, cageControllers.destroy);

@@ -11,8 +11,8 @@ const create = async (payload: CageCreate): Promise<ICageReturn> => {
   return cageSchema.parse(cageCreated);
 };
 
-const readShoppingCentro = async (): Promise<CageRead> => {
-  const cages: ICageReturn[] | null = await cageRepository.find({where: {location: "Shopping Centro"}});
+const read = async (location: string): Promise<CageRead> => {
+  const cages: ICageReturn[] | null = await cageRepository.find({where: {location: location}});
 
   if (cages.length === 0) {
     return []
@@ -29,7 +29,7 @@ const retrieve = async (id: number): Promise<ICageReturn> => {
 };
 
 const update = async (
-  foundCage: ICageReturn,
+  foundCage: ICageReturn | null,
   payload: DeepPartial<ICageReturn>
 ): Promise<ICageReturn> => {
   return cageSchema.parse(
@@ -41,4 +41,4 @@ const destroy = async (cage: Cage): Promise<void> => {
   await cageRepository.remove(cage);
 };
 
-export default { create, readShoppingCentro, retrieve, update, destroy };
+export default { create, read, retrieve, update, destroy };
