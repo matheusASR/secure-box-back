@@ -15,9 +15,18 @@ const create = async (
 
 const update = async (
   foundPaymentMethod: any,
-  payload: PaymentMethodUpdate
+  payload: PaymentMethodUpdate,
+  userId: any
 ): Promise<any> => {
+  const paymentMethodID = foundPaymentMethod.id
   await paymentMethodRepository.save({ ...foundPaymentMethod, ...payload })
+
+  const userPaymentMethods = await paymentMethodRepository.find({where: {user: {id: userId}}})
+  userPaymentMethods.forEach( async (userPaymentMethod: any) => {
+    if (userPaymentMethod.id !== paymentMethodID) {
+      await paymentMethodRepository.save({...PaymentMethod, isDefault: false})
+    }
+  });
 
   return foundPaymentMethod
 };

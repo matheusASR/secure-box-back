@@ -20,10 +20,11 @@ const create = async (req: Request, res: Response): Promise<Response> => {
 };
 
 const update = async (req: Request, res: Response): Promise<Response> => {
+  const userId = Number(req.params.userId)
   const payload: PaymentMethodUpdate = req.body;
   const foundPaymentMethod = res.locals.foundPaymentMethod;
 
-  const paymentMethodUpdated = await paymentMethodServices.update(foundPaymentMethod, payload);
+  const paymentMethodUpdated = await paymentMethodServices.update(foundPaymentMethod, payload, userId);
 
   return res.status(200).json(paymentMethodUpdated);
 };

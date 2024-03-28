@@ -13,7 +13,7 @@ paymentMethodRouter.post(
   paymentMethodControllers.create
 );
 paymentMethodRouter.patch(
-  "/:id",
+  "/:id/:userId",
   middlewares.verifyToken,
   paymentMethodControllers.update
 );
