@@ -5,11 +5,11 @@ import { paymentReadSchema } from "../schemas/payments.schemas";
 const create = async (payload: any): Promise<any> => {
   const paymentPrice = payload.price;
   const userWallet: any = await walletRepository.findOne({
-    where: { user: { id: payload.user } },
+    where: { user: { id: payload.user } }, relations: ["user"]
   });
   await walletRepository.save({
     ...userWallet,
-    balance: userWallet.balance + paymentPrice,
+    balance: Number(userWallet.balance) + Number(paymentPrice),
   });
 
   const paymentCreated: any = paymentRepository.create(payload);
@@ -20,7 +20,7 @@ const create = async (payload: any): Promise<any> => {
 
 const retrieveUserPayments = async (userId: any): Promise<any> => {
   const userPayments = await paymentRepository.find({where: {user: {id: userId}}})
-  return paymentReadSchema.parse(userPayments);
+  return userPayments;
 };
 
 export default { create, retrieveUserPayments };

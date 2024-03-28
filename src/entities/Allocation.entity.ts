@@ -19,8 +19,8 @@ export class Allocation {
     @Column({ length: 50 })
     finalDatetime: string;
 
-    @Column({ length: 10})
-    price: string;
+    @Column({ type: "decimal"})
+    price: number;
 
     @Column({ default: false })
     paymentStatus: boolean;

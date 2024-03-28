@@ -8,18 +8,18 @@ const update = async (payload: any, userId: any): Promise<any | Error> => {
   });
 
   if (!userWallet) {
-    return new AppError("Carteira não encontrada.");
+    throw new AppError("Carteira não encontrada.");
   }
 
-  if (paymentPrice > userWallet.balance) {
-    return new AppError(
+  if (Number(paymentPrice) > Number(userWallet.balance)) {
+    throw new AppError(
       "Você não possui fundos suficientes para a transação. Adicione fundos para continuar."
     );
   }
 
   const walletupdated = await walletRepository.save({
     ...userWallet,
-    balance: userWallet.balance - paymentPrice,
+    balance: Number(userWallet.balance) - Number(paymentPrice),
   });
 
   return walletupdated;

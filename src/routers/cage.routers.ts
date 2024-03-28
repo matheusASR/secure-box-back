@@ -9,8 +9,8 @@ cageRouter.use("/:id", middlewares.verifyCageIdExists);
 
 cageRouter.post(
   "",
-  middlewares.validateBody(cageCreateSchema),
-  middlewares.isAdmin,
+  // middlewares.validateBody(cageCreateSchema),
+  // middlewares.isAdmin,
   cageControllers.create
 );
 cageRouter.get("", cageControllers.read);

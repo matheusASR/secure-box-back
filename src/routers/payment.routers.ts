@@ -6,17 +6,17 @@ import { paymentControllers } from "../controllers";
 export const paymentRouter: Router = Router();
 
 paymentRouter.post(
-  "/:userId",
+  "/:id",
   middlewares.verifyIdExists,
 //   middlewares.validateBody(paymentCreateSchema),
-  middlewares.verifyToken,
+  // middlewares.verifyToken,
   paymentControllers.create
 );
 
 paymentRouter.get(
-  "/:userId",
+  "/:id",
   middlewares.verifyIdExists,
 //   middlewares.validateBody(paymentCreateSchema),
-  middlewares.verifyToken,
+  // middlewares.verifyToken,
   paymentControllers.retrieveUserPayments
 );

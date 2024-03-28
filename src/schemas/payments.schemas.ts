@@ -2,7 +2,7 @@ import { z } from "zod";
 
 const paymentSchema = z.object({
   id: z.number().positive(),
-  price: z.string().max(100),
+  price: z.number(),
   paymentDate: z.string().max(100),
   type: z.string().max(100),
   user: z.any()

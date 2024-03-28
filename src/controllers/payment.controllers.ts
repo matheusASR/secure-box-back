@@ -4,7 +4,7 @@ import { paymentServices } from "../services";
 
 const create = async (req: Request, res: Response): Promise<Response> => {
   const payload: PaymentCreate = req.body;
-  const userId = Number(req.params.userId);
+  const userId = Number(req.params.id);
   const paymentPayload: any = await paymentServices.create({
     ...payload,
     user: userId,
@@ -13,7 +13,7 @@ const create = async (req: Request, res: Response): Promise<Response> => {
 };
 
 const retrieveUserPayments = async (req: Request, res: Response): Promise<Response> => {
-  const userId = Number(req.params.userId);
+  const userId = Number(req.params.id);
   const userPayments: any = await paymentServices.retrieveUserPayments(userId);
   return res.status(200).json(userPayments);
 };

@@ -2,7 +2,7 @@ import { z } from "zod";
 
 const walletSchema = z.object({
   id: z.number().positive(),
-  balance: z.string().max(100),
+  balance: z.number(),
   user: z.any()
 });
 

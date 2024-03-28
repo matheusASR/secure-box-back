@@ -4,7 +4,7 @@ const allocationSchema = z.object({
   id: z.number().positive(),
   initialDatetime: z.string().max(50),
   finalDatetime: z.string().max(50),
-  price: z.string().max(10),
+  price: z.number(),
   paymentStatus: z.boolean(),
   finished: z.boolean(),
   userId: z.any(),

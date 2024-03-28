@@ -26,7 +26,7 @@ const create = async (
   await addressRepository.save(addressCreated);
 
   const walletCreated = walletRepository.create({
-    balance: parseFloat("0"),
+    balance: Number(0),
     user: userCreated
   })
   await walletRepository.save(walletCreated);
