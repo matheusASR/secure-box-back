@@ -3,6 +3,7 @@ import {
   PrimaryGeneratedColumn,
   Column,
   OneToOne,
+  JoinColumn,
 } from "typeorm";
 import { User } from "./User.entity";
 
@@ -14,6 +15,7 @@ export class Wallet {
   @Column({ type: "decimal" })
   balance: number; 
 
-  @OneToOne(() => User, { onDelete: 'CASCADE' }) 
+  @OneToOne(() => User)
+  @JoinColumn({ name: "userId", referencedColumnName: "id" })
   user: User;
 }

@@ -24,7 +24,7 @@ export class Address {
   @Column({ nullable: true, length: 255 })
   complement?: string;
 
-  @OneToOne(() => User, { onDelete: 'CASCADE' })
-  @JoinColumn()
+  @OneToOne(() => User)
+  @JoinColumn({ name: "userId", referencedColumnName: "id" })
   user: User;
 }

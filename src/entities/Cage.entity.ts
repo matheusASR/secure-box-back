@@ -5,6 +5,9 @@ export class Cage {
   @PrimaryGeneratedColumn("increment")
   id: number;
 
+  @Column()
+  number: number;
+  
   @Column({ length: 150 })
   location: string;
 

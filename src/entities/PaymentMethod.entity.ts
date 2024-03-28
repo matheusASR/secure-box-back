@@ -14,7 +14,7 @@ export class PaymentMethod {
   @PrimaryGeneratedColumn("increment")
   id: number;
 
-  @ManyToOne(() => User, { onDelete: 'CASCADE' })
+  @ManyToOne(() => User, (u) => u.paymentMethods)
   user: User;
 
   @Column({ length: 120 })

@@ -5,7 +5,7 @@ import { paymentMethodCreateSchema } from "./paymentMethod.schemas";
 const userSchema = z.object({
   id: z.number().positive(),
   name: z.string().max(100),
-  email: z.string().max(100).email(),
+  email: z.string().max(100),
   password: z.string().max(120),
   cpf: z.string().max(11),
   cel: z.string().max(11),
@@ -16,7 +16,7 @@ const userSchema = z.object({
 const userAddressSchema = z.object({
   id: z.number().positive(),
   name: z.string().max(100),
-  email: z.string().max(100).email(),
+  email: z.string().max(100),
   password: z.string().max(120),
   cpf: z.string().max(11),
   cel: z.string().max(11),
@@ -28,7 +28,7 @@ const userAddressSchema = z.object({
 const userProfileSchema = z.object({
   id: z.number().positive(),
   name: z.string().max(100),
-  email: z.string().max(100).email(),
+  email: z.string().max(100),
   password: z.string().max(120),
   cpf: z.string().max(11),
   cel: z.string().max(11),
@@ -39,7 +39,7 @@ const userProfileSchema = z.object({
 });
 
 const userLoginSchema = z.object({
-  email: z.string().max(100).email(),
+  email: z.string().max(100),
   password: z.string().max(120),
 });
 

@@ -7,19 +7,19 @@ export const paymentMethodRouter: Router = Router();
 
 paymentMethodRouter.post(
   "/:userId",
-  middlewares.verifyIdExists,
-  middlewares.validateBody(paymentMethodCreateSchema),
-  middlewares.verifyToken,
+  // middlewares.verifyIdExists,
+  // middlewares.validateBody(paymentMethodCreateSchema),
+  // middlewares.verifyToken,
   paymentMethodControllers.create
 );
 paymentMethodRouter.patch(
   "/:id/:userId",
-  middlewares.verifyToken,
+  // middlewares.verifyToken,
   paymentMethodControllers.update
 );
 paymentMethodRouter.delete(
   "/:id",
   middlewares.verifyPaymentMethodExists,
-  middlewares.verifyToken,
+  // middlewares.verifyToken,
   paymentMethodControllers.destroy
 );

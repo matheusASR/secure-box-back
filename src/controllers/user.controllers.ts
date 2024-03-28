@@ -6,14 +6,14 @@ import { DeepPartial } from "typeorm";
 const create = async (req: Request, res: Response): Promise<Response> => {
   const payload = req.body;
   const payloadAddress: AddressCreate = payload.address
-  const payloadUser: UserWid = {
+  const payloadUser: any = {
     name: payload.name,
     email: payload.email,
     cpf: payload.cpf,
     birthdate: payload.birthdate,
     cel: payload.cel,
     password: payload.password,
-    admin: false
+    admin: payload.admin
   }
   const user: UserReturn = await userServices.create(payloadUser, payloadAddress); 
   return res.status(201).json(user);

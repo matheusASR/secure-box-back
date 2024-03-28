@@ -9,14 +9,23 @@ userRouter.use("/:id", middlewares.verifyIdExists);
 
 userRouter.post(
   "",
-  middlewares.validateBody(userCreateSchema),
   middlewares.verifyEmailExists,
   middlewares.verifyCelExists,
   middlewares.verifyCpfExists,
-  middlewares.validateCpf,
+  // middlewares.validateCpf,
   userControllers.create
 );
 userRouter.get("", userControllers.read);
 userRouter.get("/:id", userControllers.retrieve);
-userRouter.patch("/:id", middlewares.verifyToken, middlewares.isAccountOwner, userControllers.update);
-userRouter.delete("/:id", middlewares.verifyToken, middlewares.isAccountOwner, userControllers.destroy);
+userRouter.patch(
+  "/:id",
+  // middlewares.verifyToken,
+  // middlewares.isAccountOwner,
+  userControllers.update
+);
+userRouter.delete(
+  "/:id",
+  // middlewares.verifyToken,
+  // middlewares.isAccountOwner,
+  userControllers.destroy
+);

@@ -5,7 +5,7 @@ const paymentMethodSchema = z.object({
   cardNumber: z.string().max(100),
   cardHolderName: z.string().max(100),
   expirationDate: z.string().max(5),
-  cvv: z.string().max(3),
+  cvv: z.string(),
   cardType: z.string().max(100),
   user: z.any()
 });

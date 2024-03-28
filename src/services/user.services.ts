@@ -19,17 +19,15 @@ const create = async (
   const userCreated: UserReturn = userRepository.create(payloadUser);
   await userRepository.save(userCreated);
 
-  const userId: any = Number(userCreated.id);
-
   const addressCreated = addressRepository.create({
     ...payloadAddress,
-    user: userId
+    user: userCreated
   });
   await addressRepository.save(addressCreated);
 
   const walletCreated = walletRepository.create({
     balance: parseFloat("0"),
-    user: userId
+    user: userCreated
   })
   await walletRepository.save(walletCreated);
 
@@ -57,15 +55,18 @@ const update = async (
     where: { user: {id: userID} }
   });
 
+  const userUpdated = await userRepository.save({ ...foundUser, ...payload })
+
   if (payload.address) {
-    await addressRepository.save({ ...userAddress, ...payload.address });
+    const addressUpdated = await addressRepository.save({ ...userAddress, ...payload.address });
+    return {
+      ...userUpdated,
+      address: {...addressUpdated}
+    }
   }
 
-  await userRepository.save({ ...foundUser, ...payload })
-
   return {
-    ...foundUser,
-    address: {...userAddress}
+    ...userUpdated
   }
 };
 

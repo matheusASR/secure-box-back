@@ -7,7 +7,7 @@ const create = async (req: Request, res: Response): Promise<Response> => {
   const userId = Number(req.params.userId);
   const payload = req.body;
 
-  const userPaymentMethods = await paymentMethodRepository.find({ where: { user: { id: userId } } });
+  const userPaymentMethods = await paymentMethodRepository.find({ where: { user: { id: userId } }});
 
   if (!userPaymentMethods || userPaymentMethods.length === 0) {
     payload.isDefault = true;
@@ -21,8 +21,9 @@ const create = async (req: Request, res: Response): Promise<Response> => {
 
 const update = async (req: Request, res: Response): Promise<Response> => {
   const userId = Number(req.params.userId)
+  const id = Number(req.params.id)
   const payload: PaymentMethodUpdate = req.body;
-  const foundPaymentMethod = res.locals.foundPaymentMethod;
+  const foundPaymentMethod = await paymentMethodRepository.findOne({ where: { id }})
 
   const paymentMethodUpdated = await paymentMethodServices.update(foundPaymentMethod, payload, userId);
 
@@ -32,7 +33,7 @@ const update = async (req: Request, res: Response): Promise<Response> => {
 
 const destroy = async (req: Request, res: Response): Promise<Response> => {
   const id = Number(req.params.id);
-  const paymentMethod: any = paymentMethodRepository.findOne({ where: { id },});
+  const paymentMethod: any = await paymentMethodRepository.findOne({ where: { id }});
   await paymentMethodServices.destroy(paymentMethod);
   return res.status(204).json();
 };

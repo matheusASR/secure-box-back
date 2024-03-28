@@ -1,6 +1,6 @@
 import { IPaymentMethod, PaymentMethodCreate, PaymentMethodUpdate } from "../interfaces";
 import { PaymentMethod } from "../entities";
-import { paymentMethodRepository } from "../repositories";
+import { paymentMethodRepository, userRepository } from "../repositories";
 import { paymentMethodSchema } from "../schemas";
 
 const create = async (
@@ -19,16 +19,16 @@ const update = async (
   userId: any
 ): Promise<any> => {
   const paymentMethodID = foundPaymentMethod.id
-  await paymentMethodRepository.save({ ...foundPaymentMethod, ...payload })
+  const paymentMethodUpdated = await paymentMethodRepository.save({ ...foundPaymentMethod, ...payload })
 
-  const userPaymentMethods = await paymentMethodRepository.find({where: {user: {id: userId}}})
+  const userPaymentMethods = await paymentMethodRepository.find({where: {user: {id: userId}}, relations: ["user"]})
   userPaymentMethods.forEach( async (userPaymentMethod: any) => {
     if (userPaymentMethod.id !== paymentMethodID) {
-      await paymentMethodRepository.save({...PaymentMethod, isDefault: false})
+      await paymentMethodRepository.save({...userPaymentMethod, isDefault: false})
     }
   });
 
-  return foundPaymentMethod
+  return paymentMethodUpdated
 };
 
 const destroy = async (paymentMethod: PaymentMethod): Promise<void> => {

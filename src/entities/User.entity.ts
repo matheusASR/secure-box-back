@@ -3,9 +3,15 @@ import {
   BeforeUpdate,
   Column,
   Entity,
+  JoinColumn,
+  OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { getRounds, hashSync } from "bcryptjs";
+import { PaymentMethod } from "./PaymentMethod.entity";
+import { Wallet } from "./Wallet.entity";
+import { Address } from "./Address.entity";
 
 @Entity("users")
 export class User {
@@ -32,6 +38,15 @@ export class User {
 
   @Column({ default: false })
   admin: boolean;
+
+  @OneToMany(() => PaymentMethod, (pm) => pm.user, {onDelete: 'CASCADE'})
+  paymentMethods: Array<PaymentMethod>
+
+  @OneToOne(() => Wallet, (w) => w.user, {onDelete: 'CASCADE'})
+  wallet: Wallet
+
+  @OneToOne(() => Address, (a) => a.user, {onDelete: 'CASCADE'})
+  address: Address
 
   @BeforeInsert()
   @BeforeUpdate()
