@@ -46,10 +46,10 @@ const read = async (): Promise<AllocationRead> => {
     })
   );
 
-  return allocationReadSchema.parse(allocationRead);
+  return allocationRead;
 };
 
-const retrieve = async (id: number): Promise<IAllocationReturn> => {
+const retrieve = async (id: number): Promise<any> => {
   const allocation: Allocation | null = await allocationRepository.findOne({
     relations: ["user", "cage"],
     where: { id },
@@ -66,7 +66,7 @@ const retrieve = async (id: number): Promise<IAllocationReturn> => {
     cageId: allocation?.cage.id,
   };
 
-  return allocationSchema.parse(allocationFormatted);
+  return allocationFormatted;
 };
 
 const userInUseAllocations = async (userId: number): Promise<any> => {
@@ -92,7 +92,7 @@ const userInUseAllocations = async (userId: number): Promise<any> => {
     })
   );
 
-  return allocationReadSchema.parse(allocationRead);
+  return allocationRead;
 };
 
 const userFinishedAllocations = async (userId: number): Promise<any> => {
@@ -118,16 +118,15 @@ const userFinishedAllocations = async (userId: number): Promise<any> => {
     })
   );
 
-  return allocationReadSchema.parse(allocationRead);
+  return allocationRead;
 };
 
 const update = async (
   foundAllocation: any,
   payload: DeepPartial<any>
 ): Promise<any> => {
-  return updateReturn.parse(
-    await allocationRepository.save({ ...foundAllocation, ...payload })
-  );
+  const updated =await allocationRepository.save({ ...foundAllocation, ...payload })
+  return updated
 };
 
 const destroy = async (allocation: Allocation): Promise<void> => {

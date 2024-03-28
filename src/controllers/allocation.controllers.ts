@@ -10,7 +10,7 @@ const create = async (req: Request, res: Response): Promise<Response> => {
   const payload: any = req.body
   const restDefault = {
     paymentStatus: false,
-    price: "null",
+    price: 0,
     finalDatetime: "null",
     finished: false,
   }
