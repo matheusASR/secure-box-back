@@ -18,17 +18,17 @@ const update = async (
   payload: PaymentMethodUpdate,
   userId: any
 ): Promise<any> => {
-  const paymentMethodID = foundPaymentMethod.id
-  const paymentMethodUpdated = await paymentMethodRepository.save({ ...foundPaymentMethod, ...payload })
+  const paymentMethodID = foundPaymentMethod.id;
+  const paymentMethodUpdated = await paymentMethodRepository.save({ ...foundPaymentMethod, ...payload });
+  const userPaymentMethods = await paymentMethodRepository.find({ where: { user: { id: userId } }, relations: ["user"] });
 
-  const userPaymentMethods = await paymentMethodRepository.find({where: {user: {id: userId}}, relations: ["user"]})
-  userPaymentMethods.forEach( async (userPaymentMethod: any) => {
+  for (const userPaymentMethod of userPaymentMethods) {
     if (userPaymentMethod.id !== paymentMethodID) {
-      await paymentMethodRepository.save({...userPaymentMethod, isDefault: false})
+      await paymentMethodRepository.save({ ...userPaymentMethod, isDefault: false });
     }
-  });
+  }
 
-  return paymentMethodUpdated
+  return paymentMethodUpdated;
 };
 
 const destroy = async (paymentMethod: PaymentMethod): Promise<void> => {

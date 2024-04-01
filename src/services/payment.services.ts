@@ -9,7 +9,7 @@ const create = async (payload: any): Promise<any> => {
   });
   await walletRepository.save({
     ...userWallet,
-    balance: Number(userWallet.balance) + Number(paymentPrice),
+    balance: (Number(userWallet.balance) + Number(paymentPrice)).toFixed(2),
   });
 
   const paymentCreated: any = paymentRepository.create(payload);
