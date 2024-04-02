@@ -31,7 +31,13 @@ const update = async (
   return paymentMethodUpdated;
 };
 
-const destroy = async (paymentMethod: PaymentMethod): Promise<void> => {
+const destroy = async (paymentMethod: PaymentMethod, userId: any): Promise<void> => {
+  const userPaymentMethods = await paymentMethodRepository.find({ where: { user: { id: userId } }, relations: ["user"] });
+  for (const userPaymentMethod of userPaymentMethods) {
+    if (userPaymentMethod.id !== paymentMethod.id) {
+      await paymentMethodRepository.save({ ...userPaymentMethod, isDefault: true });
+    }
+  }
   await paymentMethodRepository.remove(paymentMethod);
 };
 

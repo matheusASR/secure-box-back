@@ -52,16 +52,11 @@ export class User {
   @BeforeUpdate()
   hashSensitiveData() {
     const passwordRounds = 10;
-    const cpfRounds = 8; 
 
     const hasPasswordRounds = getRounds(this.password);
-    const hasCpfRounds = getRounds(this.cpf);
 
     if (!hasPasswordRounds) {
       this.password = hashSync(this.password, passwordRounds);
-    }
-    if (!hasCpfRounds) {
-      this.cpf = hashSync(this.cpf, cpfRounds);
     }
   }
 }

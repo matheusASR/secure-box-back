@@ -13,13 +13,13 @@ paymentMethodRouter.post(
   paymentMethodControllers.create
 );
 paymentMethodRouter.patch(
-  "/:id/:userId",
-  // middlewares.verifyToken,
+  "/:id/",
+  middlewares.verifyToken,
   paymentMethodControllers.update
 );
 paymentMethodRouter.delete(
   "/:id",
   middlewares.verifyPaymentMethodExists,
-  // middlewares.verifyToken,
+  middlewares.verifyToken,
   paymentMethodControllers.destroy
 );

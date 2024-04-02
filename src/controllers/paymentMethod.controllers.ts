@@ -20,7 +20,7 @@ const create = async (req: Request, res: Response): Promise<Response> => {
 };
 
 const update = async (req: Request, res: Response): Promise<Response> => {
-  const userId = Number(req.params.userId)
+  const userId = res.locals.userID
   const id = Number(req.params.id)
   const payload: PaymentMethodUpdate = req.body;
   const foundPaymentMethod = await paymentMethodRepository.findOne({ where: { id }})
@@ -34,7 +34,8 @@ const update = async (req: Request, res: Response): Promise<Response> => {
 const destroy = async (req: Request, res: Response): Promise<Response> => {
   const id = Number(req.params.id);
   const paymentMethod: any = await paymentMethodRepository.findOne({ where: { id }});
-  await paymentMethodServices.destroy(paymentMethod);
+  const userId = res.locals.userID
+  await paymentMethodServices.destroy(paymentMethod, userId);
   return res.status(204).json();
 };
 

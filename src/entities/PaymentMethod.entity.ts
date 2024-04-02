@@ -7,7 +7,6 @@ import {
   ManyToOne,
 } from "typeorm";
 import { User } from "./User.entity";
-import { hashSync, getRounds } from "bcryptjs";
 
 @Entity("payment_methods")
 export class PaymentMethod {
@@ -37,17 +36,18 @@ export class PaymentMethod {
 
   @BeforeInsert()
   @BeforeUpdate()
-  hashSensitiveData() {
-    const rounds = 10; // Número de rounds para o hash
-    const hasCardNumberRounds = getRounds(this.cardNumber);
-    const hasCvvRounds = getRounds(this.cvv);
-
-    if (!hasCardNumberRounds) {
-      this.cardNumber = hashSync(this.cardNumber, rounds);
+  hideSensitiveData() {
+    // Verifica se o número do cartão de crédito precisa ser ocultado
+    if (this.cardNumber.length >= 16) {
+      // Substitui os dígitos de 4 a 12 por "X"
+      const visibleDigits = this.cardNumber.substring(0, 4) + "X".repeat(8) + this.cardNumber.substring(12);
+      this.cardNumber = visibleDigits;
     }
 
-    if (!hasCvvRounds) {
-      this.cvv = hashSync(this.cvv, rounds);
+    // Verifica se o CVV precisa ser ocultado
+    if (this.cvv.length >= 3) {
+      // Substitui todos os dígitos do CVV por "X"
+      this.cvv = "X".repeat(this.cvv.length);
     }
   }
 }
