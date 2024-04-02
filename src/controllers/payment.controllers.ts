@@ -4,7 +4,7 @@ import { paymentServices } from "../services";
 
 const create = async (req: Request, res: Response): Promise<Response> => {
   const payload: PaymentCreate = req.body;
-  const userId = Number(req.params.id);
+  const userId = req.params.id;
   const paymentPayload: any = await paymentServices.create({
     ...payload,
     user: userId,

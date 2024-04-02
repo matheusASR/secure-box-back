@@ -6,6 +6,6 @@ export const walletRouter: Router = Router();
 
 walletRouter.patch(
   "/:userId",
-  //middlewares
+  middlewares.verifyToken,
   walletControllers.update
 );

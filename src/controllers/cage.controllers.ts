@@ -11,8 +11,8 @@ const create = async (req: Request, res: Response): Promise<Response> => {
 };
 
 const read = async (req: Request, res: Response): Promise<Response> => {
-  
-  const cages: CageRead = await cageServices.read();
+  const location: any = req.query.location
+  const cages: CageRead = await cageServices.read(location);
   return res.status(200).json(cages);
 };
 

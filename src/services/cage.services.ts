@@ -11,8 +11,8 @@ const create = async (payload: CageCreate): Promise<ICageReturn> => {
   return cageSchema.parse(cageCreated);
 };
 
-const read = async (): Promise<CageRead> => {
-  const cages: ICageReturn[] | null = await cageRepository.find();
+const read = async (location: any): Promise<CageRead> => {
+  const cages: ICageReturn[] | null = await cageRepository.find({where: {location}});
 
   if (cages.length === 0) {
     return []

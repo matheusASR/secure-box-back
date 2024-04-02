@@ -7,30 +7,40 @@ export const allocationRouter: Router = Router();
 allocationRouter.post(
   "/:cageId",
  middlewares.verifyToken,
-  allocationControllers.create
+ allocationControllers.create
 );
-allocationRouter.get("", allocationControllers.read);
+
+allocationRouter.get("", middlewares.isAdmin, allocationControllers.read);
+
 allocationRouter.get(
   "/:id",
-  // middlewares.verifyAllocationIdExists,
+  middlewares.verifyAllocationIdExists,
+  middlewares.isAdmin,
   allocationControllers.retrieve
 );
+
 allocationRouter.get(
   "/:userId/inuse",
+  middlewares.verifyToken,
   allocationControllers.userInUseAllocations
 );
+
 allocationRouter.get(
   "/:userId/finished",
+  middlewares.verifyToken,
   allocationControllers.userFinishedAllocations
 );
+
 allocationRouter.patch(
   "/:id",
-  // middlewares.verifyAllocationIdExists,
+  middlewares.verifyAllocationIdExists,
+  middlewares.verifyToken,
   allocationControllers.update
 );
+
 allocationRouter.delete(
   "/:id",
-  // middlewares.verifyAllocationIdExists,
-  // middlewares.isAdmin,
+  middlewares.verifyAllocationIdExists,
+  middlewares.isAdmin,
   allocationControllers.destroy
 );
