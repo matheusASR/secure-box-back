@@ -6,6 +6,7 @@ import allocationControllers from "./allocation.controllers";
 import paymentMethodControllers from "./paymentMethod.controllers";
 import paymentControllers from "./payment.controllers";
 import walletControllers from "./wallet.controllers";
+import pixControllers from "./pix.controllers";
 
 export {
     loginControllers,
@@ -15,5 +16,6 @@ export {
     allocationControllers,
     paymentMethodControllers,
     paymentControllers,
-    walletControllers
+    walletControllers,
+    pixControllers
 }

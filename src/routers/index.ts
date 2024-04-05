@@ -5,6 +5,8 @@ import { profileRouter } from "./profile.routers";
 import { allocationRouter } from "./allocation.routers";
 import { paymentMethodRouter } from "./paymentMethod.routers";
 import { paymentRouter } from "./payment.routers";
+import { pixRouter } from "./pix.routers";
+
 
 export {
   userRouter,
@@ -13,5 +15,6 @@ export {
   profileRouter,
   allocationRouter,
   paymentMethodRouter,
-  paymentRouter
+  paymentRouter,
+  pixRouter
 };

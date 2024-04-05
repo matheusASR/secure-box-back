@@ -6,6 +6,7 @@ import allocationServices from "./allocation.services";
 import paymentMethodServices from "./paymentMethod.services";
 import paymentServices from "./payment.services";
 import walletServices from "./wallet.services";
+import pixServices from "./pix.services";
 
 export {
     loginServices,
@@ -15,5 +16,6 @@ export {
     allocationServices,
     paymentMethodServices,
     paymentServices,
-    walletServices
+    walletServices,
+    pixServices
 }
