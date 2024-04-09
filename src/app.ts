@@ -8,6 +8,7 @@ import {
   loginRouter,
   paymentMethodRouter,
   paymentRouter,
+  pixRouter,
   profileRouter,
   userRouter,
 } from "./routers";
@@ -40,6 +41,7 @@ app.use("/allocations", allocationRouter);
 app.use("/payments", paymentRouter);
 app.use("/wallets", walletRouter);
 app.use("/paymentMethods", paymentMethodRouter);
+app.use("/pix", pixRouter);
 app.use(middlewares.handleError);
 
 export default app;

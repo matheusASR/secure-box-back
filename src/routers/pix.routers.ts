@@ -4,5 +4,5 @@ import { pixControllers } from "../controllers";
 
 export const pixRouter: Router = Router();
 
-pixRouter.get("/qrcode", pixControllers.generateQRCode);
-pixRouter.get("/pix-code", pixControllers.generatePixCode);
+pixRouter.post("", pixControllers.generatePIX);
+pixRouter.get("", pixControllers.verifyPIX);

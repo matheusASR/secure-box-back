@@ -11,7 +11,7 @@ userRouter.post(
   middlewares.verifyEmailExists,
   middlewares.verifyCelExists,
   middlewares.verifyCpfExists,
-  middlewares.validateCpf,
+  // middlewares.validateCpf,
   userControllers.create
 );
 
