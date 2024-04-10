@@ -14,6 +14,7 @@ import {
 } from "./routers";
 import middlewares from "./middlewares";
 import { walletRouter } from "./routers/wallet.routers";
+import bodyParser from "body-parser";
 
 const app: Application = express();
 app.use(json());
@@ -42,6 +43,7 @@ app.use("/payments", paymentRouter);
 app.use("/wallets", walletRouter);
 app.use("/paymentMethods", paymentMethodRouter);
 app.use("/pix", pixRouter);
+
 app.use(middlewares.handleError);
 
 export default app;

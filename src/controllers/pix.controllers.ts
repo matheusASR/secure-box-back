@@ -46,25 +46,26 @@ const generatePIX = async (req: Request, res: Response): Promise<any> => {
         expiracao: 3600,
       },
       valor: {
-        original: "100.00",
+        original: "0.10",
       },
       chave: "48124536821",
       solicitacaoPagador: "Cobrança dos serviços prestados.",
     };
 
-    const cobResponse = await reqGN.post("/v2/cob", dataCob)
+    const cobResponse = await reqGN.post("/v2/cob", dataCob);
+    const qrCodeResponse = await reqGN.get(
+      `/v2/loc/${cobResponse.data.loc.id}/qrcode`
+    );
 
-    return res.status(200).json(cobResponse.data);
+    return res.status(201).json(qrCodeResponse.data);
   } catch (error: any) {
     return res.status(500).json(error);
   }
 };
 
 const verifyPIX = async (req: Request, res: Response): Promise<any> => {
-  try {
-  } catch (error: any) {
-    return res.status(500).json(error);
-  }
+  console.log(req.body)
+  return res.status(200)
 };
 
 export default { generatePIX, verifyPIX };
