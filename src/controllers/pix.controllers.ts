@@ -64,7 +64,7 @@ const generatePIX = async (req: Request, res: Response): Promise<any> => {
 };
 
 const verifyPIX = async (req: Request, res: Response): Promise<any> => {
-  return res.status(200).end()
+  return res.status(200).json({"message": "Olá mundo!"})
 };
 
 export default { generatePIX, verifyPIX };
