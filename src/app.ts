@@ -42,7 +42,7 @@ app.use("/allocations", allocationRouter);
 app.use("/payments", paymentRouter);
 app.use("/wallets", walletRouter);
 app.use("/paymentMethods", paymentMethodRouter);
-app.use("/pix", pixRouter);
+app.use("", pixRouter);
 
 app.use(middlewares.handleError);
 
