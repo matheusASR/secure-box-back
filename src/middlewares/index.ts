@@ -11,6 +11,7 @@ import { verifyAllocationIdExists } from "./verifyAllocationIdExists";
 import { verifyCageIdExists } from "./verifyCageIdExists";
 import { validateCpf } from "./validateCpf.middleware";
 import { verifyPaymentMethodExists } from "./verifyPaymentMethodExists";
+import { verifyEmail } from "./verifyEmail.middlewares";
 
 export default {
   handleError,
@@ -25,5 +26,6 @@ export default {
   verifyAllocationIdExists,
   verifyCageIdExists,
   validateCpf,
-  verifyPaymentMethodExists
+  verifyPaymentMethodExists,
+  verifyEmail
 };

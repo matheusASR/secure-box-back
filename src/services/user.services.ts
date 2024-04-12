@@ -11,6 +11,7 @@ import { addressRepository, userRepository } from "../repositories";
 import { userReadSchema, userReturnSchema, userSchemaUpdate } from "../schemas";
 import { DeepPartial } from "typeorm";
 import walletRepository from "../repositories/wallet.repository";
+import nodemailer from 'nodemailer';
 
 const create = async (
   payloadUser: UserWid,
@@ -74,4 +75,33 @@ const destroy = async (user: User): Promise<void> => {
   await userRepository.remove(user);
 };
 
-export default { create, read, retrieve, update, destroy };
+const sendCode = async (payload: any): Promise<void> => {
+  var transporter = nodemailer.createTransport({
+    host: "sandbox.smtp.mailtrap.io",
+    port: 2525,
+    auth: {
+      user: "332de3b5d32f72",
+      pass: "68ed3d48c31259"
+    }
+  });
+  const emailDestino = payload.email;
+  const assunto = 'Código de Verificação';
+  const codigo = payload.code;
+
+  const mensagem = `Seu código de verificação é: ${codigo}`;
+
+  const mailOptions: nodemailer.SendMailOptions = {
+    from: 'regomatheus881@gmail.com',
+    to: emailDestino,
+    subject: assunto,
+    text: mensagem
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log('Erro ao enviar e-mail:', error);
+    }
+  });
+};
+
+export default { create, read, retrieve, update, destroy, sendCode };

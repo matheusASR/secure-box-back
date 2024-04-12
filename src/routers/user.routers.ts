@@ -32,3 +32,8 @@ userRouter.delete(
   middlewares.isAccountOwner,
   userControllers.destroy
 );
+
+userRouter.patch("",
+  middlewares.verifyEmail,
+  userControllers.sendCode
+)

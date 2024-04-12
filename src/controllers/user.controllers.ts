@@ -44,4 +44,11 @@ const destroy = async (req: Request, res: Response): Promise<Response> => {
   return res.status(204).json();
 };
 
-export default { create, read, retrieve, update, destroy };
+const sendCode = async (req: Request, res: Response): Promise<Response> => {
+  const payload = req.body;
+
+  await userServices.sendCode(payload);
+  return res.status(200).end();
+};
+
+export default { create, read, retrieve, update, destroy, sendCode };

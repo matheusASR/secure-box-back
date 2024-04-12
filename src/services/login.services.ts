@@ -24,4 +24,17 @@ const login = async ({
   return { token };
 };
 
-export default { login };
+const loginCode = async (email: any): Promise<LoginReturn> => {
+  const foundUser: User | null = await userRepository.findOneBy({ email });
+  if (!foundUser) throw new AppError("Email inválido!", 401);
+
+  const token: string = sign(
+    { admin: foundUser.admin },
+    process.env.SECRET_KEY!,
+    { subject: foundUser.id.toString(), expiresIn: process.env.EXPIRES_IN! }
+  );
+
+  return { token };
+};
+
+export default { login, loginCode };
