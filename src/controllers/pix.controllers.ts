@@ -5,7 +5,7 @@ import path from "path";
 import "reflect-metadata";
 import "dotenv/config";
 import { Request, Response } from "express";
-// import * as Gerencianet from 'gn-api-sdk-node';
+import * as Gerencianet from "gn-api-sdk-node"
 
 const options = {
 	sandbox: false,
@@ -16,7 +16,7 @@ const options = {
   )
 };
 
-// const gerencianet = new Gerencianet(options);
+const gerencianet = new Gerencianet(options);
 
 const generatePIX = async (req: Request, res: Response): Promise<any> => {
   try {
@@ -88,7 +88,7 @@ const configWebhook = async (req: Request, res: Response): Promise<any> => {
     chave: "48124536821"
   }
 
-  // return await gerencianet.pixConfigWebhook(params, body)
+  return await gerencianet.pixConfigWebhook(params, body)
 };
 
 export default { generatePIX, verifyPIX, configWebhook };
