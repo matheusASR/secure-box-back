@@ -12,7 +12,7 @@ const options = {
 	client_id: process.env.GN_CLIENT_ID,
 	client_secret: process.env.GN_CLIENT_SECRET,
 	pix_cert: fs.readFileSync(
-    path.resolve(__dirname, "../certs/homologacao-562010-secbox - PIX.p12")
+    path.resolve(__dirname, "../certs/producao-562010-secbox - PIX.p12")
   )
 };
 
@@ -21,7 +21,7 @@ const gerencianet = new Gerencianet(options);
 const generatePIX = async (req: Request, res: Response): Promise<any> => {
   try {
     const cert = fs.readFileSync(
-      path.resolve(__dirname, "../certs/homologacao-562010-secbox - PIX.p12")
+      path.resolve(__dirname, "../certs/producao-562010-secbox - PIX.p12")
     );
     const agent = new https.Agent({
       pfx: cert,
