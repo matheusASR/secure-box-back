@@ -6,4 +6,3 @@ export const pixRouter: Router = Router();
 
 pixRouter.post("/generatepix", pixControllers.generatePIX);
 pixRouter.post("/webhook", pixControllers.verifyPIX);
-pixRouter.post("/config-webhook", pixControllers.configWebhook);

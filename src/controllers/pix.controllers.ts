@@ -67,48 +67,4 @@ const verifyPIX = async (req: Request, res: Response): Promise<any> => {
   return res.status(200).json({"message": "Olá mundo!"})
 };
 
-const configWebhook = async (req: Request, res: Response) => {
-  const cert = fs.readFileSync(
-    path.resolve(__dirname, "../certs/producao-562010-secbox - PIX.p12")
-  );
-  const agent = new https.Agent({
-    pfx: cert,
-    passphrase: "",
-  });
-  const credentials = Buffer.from(
-    `${process.env.GN_CLIENT_ID}:${process.env.GN_CLIENT_SECRET}`
-  ).toString("base64");
-  const responseToken = await axios({
-    method: "POST",
-    url: `${process.env.GN_ENDPOINT}/oauth/token`,
-    headers: {
-      Authorization: `Basic ${credentials}`,
-      "Content-Type": "application/json",
-    },
-    httpsAgent: agent,
-    data: {
-      grant_type: "client_credentials",
-    },
-  });
-
-  const acessToken = responseToken.data?.access_token;
-
-  const reqGN: AxiosInstance = axios.create({
-    baseURL: process.env.GN_ENDPOINT as any,
-    httpsAgent: agent as any,
-    headers: {
-      Authorization: `Bearer ${acessToken}`,
-      "Content-Type": "application/json",
-    },
-  });
-  const body = {
-		"webhookUrl": "https://api.secbox.online/prod/webhook"
-	}
-	
-	const chave = "2b720e07-d74a-42b8-ba94-cfa71bc9ca8d"
-	
-  const response = await reqGN.put(`/v2/webhook/${chave}`, body);
-  return res.status(200).json(response)
-};
-
-export default { generatePIX, verifyPIX, configWebhook };
+export default { generatePIX, verifyPIX };
