@@ -67,7 +67,7 @@ const verifyPIX = async (req: Request, res: Response): Promise<any> => {
   return res.status(200).json({"message": "Olá mundo!"})
 };
 
-const configWebhook = async () => {
+const configWebhook = async (req: Request, res: Response) => {
   const cert = fs.readFileSync(
     path.resolve(__dirname, "../certs/producao-562010-secbox - PIX.p12")
   );
@@ -108,7 +108,7 @@ const configWebhook = async () => {
 	const chave = "2b720e07-d74a-42b8-ba94-cfa71bc9ca8d"
 	
   const response = await reqGN.post(`/webhook/${chave}`, body);
-  return response
+  return res.status(200).json(response)
 };
 
 export default { generatePIX, verifyPIX, configWebhook };
