@@ -5,18 +5,6 @@ import path from "path";
 import "reflect-metadata";
 import "dotenv/config";
 import { Request, Response } from "express";
-import * as Gerencianet from "gn-api-sdk-node"
-
-const options = {
-	sandbox: false,
-	client_id: process.env.GN_CLIENT_ID,
-	client_secret: process.env.GN_CLIENT_SECRET,
-	pix_cert: fs.readFileSync(
-    path.resolve(__dirname, "../certs/producao-562010-secbox - PIX.p12")
-  )
-};
-
-const gerencianet = new Gerencianet(options);
 
 const generatePIX = async (req: Request, res: Response): Promise<any> => {
   try {
@@ -79,16 +67,4 @@ const verifyPIX = async (req: Request, res: Response): Promise<any> => {
   return res.status(200).json({"message": "Olá mundo!"})
 };
 
-const configWebhook = async (req: Request, res: Response): Promise<any> => {
-  const body = {
-    "webhookUrl": "https://api.secbox.online/prod/webhook"
-  }
-
-  const params = {
-    chave: "48124536821"
-  }
-
-  return await gerencianet.pixConfigWebhook(params, body)
-};
-
-export default { generatePIX, verifyPIX, configWebhook };
+export default { generatePIX, verifyPIX };
