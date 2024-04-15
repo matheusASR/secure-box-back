@@ -107,7 +107,7 @@ const configWebhook = async (req: Request, res: Response) => {
 	
 	const chave = "2b720e07-d74a-42b8-ba94-cfa71bc9ca8d"
 	
-  const response = await reqGN.post(`/webhook/${chave}`, body);
+  const response = await reqGN.put(`/v2/webhook/${chave}`, body);
   return res.status(200).json(response)
 };
 
