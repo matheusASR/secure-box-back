@@ -19,6 +19,8 @@ var options = {
 var gerencianet = new Gerencianet(options);
 
 const generatePIX = async (req: Request, res: Response): Promise<any> => {
+  const payload = req.body
+  const value = payload.value
   try {
     const cert = fs.readFileSync(
       path.resolve(__dirname, "../certs/producao-562010-secbox - PIX.p12")
@@ -60,7 +62,7 @@ const generatePIX = async (req: Request, res: Response): Promise<any> => {
       valor: {
         original: "0.10",
       },
-      chave: "48124536821",
+      chave: "2b720e07-d74a-42b8-ba94-cfa71bc9ca8d",
       solicitacaoPagador: "Cobrança dos serviços prestados.",
     };
 
@@ -79,6 +81,10 @@ const verifyPIX = async (req: Request, res: Response): Promise<any> => {
   return res.status(200).json({"message": "Olá mundo!"})
 };
 
+const statusPix = async (req: Request, res: Response): Promise<any> => {
+  return res.status(200).end()
+};
+
 const configWebhook = async (req: Request, res: Response): Promise<any> => {
   let body = {
 		"webhookUrl": "https://api.secbox.online/prod/webhook"
@@ -91,4 +97,4 @@ const configWebhook = async (req: Request, res: Response): Promise<any> => {
 	return await gerencianet.pixConfigWebhook(params, body);
 };
 
-export default { generatePIX, verifyPIX, configWebhook };
+export default { generatePIX, verifyPIX, configWebhook, statusPix };
