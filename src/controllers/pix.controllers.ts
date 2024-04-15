@@ -107,16 +107,8 @@ const configWebhook = async () => {
 	
 	const chave = "2b720e07-d74a-42b8-ba94-cfa71bc9ca8d"
 	
-  try {
-    const response = await reqGN.post(`/webhook/${chave}`, body);
-    if (response.status === 200) {
-      console.log('Webhook configurado com sucesso');
-    } else {
-      console.error('Falha ao configurar o webhook');
-    }
-  } catch (error) {
-    console.error('Erro ao configurar o webhook:', error);
-  }
+  const response = await reqGN.post(`/webhook/${chave}`, body);
+  return response
 };
 
 export default { generatePIX, verifyPIX, configWebhook };
