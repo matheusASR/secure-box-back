@@ -13,6 +13,9 @@ export class Address {
   number: string;
 
   @Column({ length: 100 })
+  neighborhood: string;
+
+  @Column({ length: 100 })
   city: string;
 
   @Column({ length: 100 })

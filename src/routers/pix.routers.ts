@@ -4,5 +4,5 @@ import { pixControllers } from "../controllers";
 
 export const pixRouter: Router = Router();
 
-pixRouter.post("/pix", pixControllers.generatePIX);
+pixRouter.post("/generatepix", pixControllers.generatePIX);
 pixRouter.post("/webhook", pixControllers.verifyPIX);
