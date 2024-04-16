@@ -75,7 +75,10 @@ const generatePIX = async (req: Request, res: Response): Promise<any> => {
       `/v2/loc/${cobResponse.data.loc.id}/qrcode`
     );
 
-    return res.status(201).json(qrCodeResponse.data);
+    return res.status(201).json({
+      txid: cobResponse.data.txid,
+      ...qrCodeResponse.data
+    });
   } catch (error: any) {
     return res.status(500).json(error);
   }
@@ -121,6 +124,15 @@ const configWebhook = async (req: Request, res: Response): Promise<any> => {
 };
 
 const verifyStatusPix = async (req: Request, res: Response): Promise<any> => {
+  const txid = req.body.txid
+  const txidFound = await pixRepository.findOne({
+    where: { txid }
+  });
+  if (txidFound) {
+    return res.status(200).end()
+  } else {
+    return res.status(404).end()
+  }
 };
 
 export default { generatePIX, verifyPIX, configWebhook, statusPix, verifyStatusPix };
