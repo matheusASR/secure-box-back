@@ -86,13 +86,12 @@ const verifyPIX = async (req: Request, res: Response): Promise<any> => {
 };
 
 const statusPix = async (req: Request, res: Response): Promise<any> => {
-  const payload = req.body.pix
   const payloadPix = {
-    endToEndId: payload.endToEndId,
-    txid: payload.txid,
-    valor: payload.valor,
-    horario: payload.horario,
-    chave: payload.chave
+    endToEndId: "1",
+    txid: "1",
+    valor: "1",
+    horario: "1",
+    chave: "1"
   }
   const pixCreated = pixRepository.create(payloadPix);
   await pixRepository.save(pixCreated);
