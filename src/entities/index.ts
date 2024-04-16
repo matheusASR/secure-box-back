@@ -6,6 +6,7 @@ import { Notification } from "./Notification.entity";
 import { PaymentMethod } from "./PaymentMethod.entity";
 import { Payment } from "./Payment.entity";
 import { Wallet } from "./Wallet.entity";
+import { Pix } from "./Pix.entity";
 
 export {
     Allocation,
@@ -15,5 +16,6 @@ export {
     Notification,
     PaymentMethod,
     Payment,
-    Wallet
+    Wallet,
+    Pix
 }

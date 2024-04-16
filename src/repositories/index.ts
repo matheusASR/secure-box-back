@@ -6,6 +6,7 @@ import addressRepository from "./address.repository";
 import paymentMethodRepository from "./paymentMethod.repository";
 import paymentRepository from "./payment.repository";
 import walletRepository from "./wallet.repository";
+import pixRepository from "./pix.repository";
 
 export {
     cageRepository,
@@ -15,5 +16,6 @@ export {
     addressRepository,
     paymentMethodRepository,
     paymentRepository,
-    walletRepository
+    walletRepository,
+    pixRepository
 }

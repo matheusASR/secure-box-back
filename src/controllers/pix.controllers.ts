@@ -5,20 +5,26 @@ import path from "path";
 import "reflect-metadata";
 import "dotenv/config";
 import { Request, Response } from "express";
-import Gerencianet from 'gn-api-sdk-typescript';
+import Gerencianet from "gn-api-sdk-typescript";
+import { pixRepository } from "../repositories";
 
 var options = {
   sandbox: false,
-  client_id: process.env.GN_CLIENT_ID || '',
-  client_secret: process.env.GN_CLIENT_SECRET || '',
-  pix_cert: path.join(__dirname, '..', 'certs', 'producao-562010-secbox - PIX.p12')
+  client_id: process.env.GN_CLIENT_ID || "",
+  client_secret: process.env.GN_CLIENT_SECRET || "",
+  pix_cert: path.join(
+    __dirname,
+    "..",
+    "certs",
+    "producao-562010-secbox - PIX.p12"
+  ),
 };
 
 var gerencianet = new Gerencianet(options);
 
 const generatePIX = async (req: Request, res: Response): Promise<any> => {
-  const payload = req.body
-  const value = payload.value
+  const payload = req.body;
+  const value = payload.value;
   try {
     const cert = fs.readFileSync(
       path.resolve(__dirname, "../certs/producao-562010-secbox - PIX.p12")
@@ -58,7 +64,7 @@ const generatePIX = async (req: Request, res: Response): Promise<any> => {
         expiracao: 3600,
       },
       valor: {
-        original: "0.10",
+        original: "0.05",
       },
       chave: "2b720e07-d74a-42b8-ba94-cfa71bc9ca8d",
       solicitacaoPagador: "Cobrança dos serviços prestados.",
@@ -76,24 +82,25 @@ const generatePIX = async (req: Request, res: Response): Promise<any> => {
 };
 
 const verifyPIX = async (req: Request, res: Response): Promise<any> => {
-  return res.status(200).json({"message": "Olá mundo!"})
+  return res.status(200).json({ message: "Olá mundo!" });
 };
 
 const statusPix = async (req: Request, res: Response): Promise<any> => {
-  console.log(req.body)
-  return res.status(200).end()
+  const payload = req.body.pix
+  const pixCreated = pixRepository.create(payload);
+  await pixRepository.save(pixCreated);
 };
 
 const configWebhook = async (req: Request, res: Response): Promise<any> => {
   let body = {
-		"webhookUrl": "https://api.secbox.online/prod/webhook"
-	}
-	
-	let params = {
-		chave: "2b720e07-d74a-42b8-ba94-cfa71bc9ca8d"
-	}
-	
-	return await gerencianet.pixConfigWebhook(params, body);
+    webhookUrl: "https://api.secbox.online/prod/webhook",
+  };
+
+  let params = {
+    chave: "2b720e07-d74a-42b8-ba94-cfa71bc9ca8d",
+  };
+
+  return await gerencianet.pixConfigWebhook(params, body);
 };
 
 export default { generatePIX, verifyPIX, configWebhook, statusPix };
