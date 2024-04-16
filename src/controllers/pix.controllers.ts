@@ -82,25 +82,17 @@ const generatePIX = async (req: Request, res: Response): Promise<any> => {
 };
 
 const verifyPIX = async (req: Request, res: Response): Promise<any> => {
-  const payloadPix = {
-    endToEndId: "1",
-    txid: "1",
-    valor: "1",
-    horario: "1",
-    chave: "1"
-  }
-  const pixCreated = pixRepository.create(payloadPix);
-  await pixRepository.save(pixCreated);
   return res.status(200).end()
 };
 
 const statusPix = async (req: Request, res: Response): Promise<any> => {
+  const body = req.body.pix
   const payloadPix = {
-    endToEndId: "1",
-    txid: "1",
-    valor: "1",
-    horario: "1",
-    chave: "1"
+    endToEndId: body.endToEndId,
+    txid: body.txid,
+    valor: body.valor,
+    horario: body.horario,
+    chave: body.chave
   }
   const pixCreated = pixRepository.create(payloadPix);
   await pixRepository.save(pixCreated);
