@@ -86,16 +86,7 @@ const verifyPIX = async (req: Request, res: Response): Promise<any> => {
 };
 
 const statusPix = async (req: Request, res: Response): Promise<any> => {
-  const body = req.body.pix
-  const payloadPix = {
-    endToEndId: body.endToEndId,
-    txid: body.txid,
-    valor: body.valor,
-    horario: body.horario,
-    chave: body.chave
-  }
-  const pixCreated = pixRepository.create(payloadPix);
-  await pixRepository.save(pixCreated);
+  console.log(req.body)
   return res.status(200).end()
 };
 
@@ -111,4 +102,7 @@ const configWebhook = async (req: Request, res: Response): Promise<any> => {
   return await gerencianet.pixConfigWebhook(params, body);
 };
 
-export default { generatePIX, verifyPIX, configWebhook, statusPix };
+const verifyStatusPix = async (req: Request, res: Response): Promise<any> => {
+};
+
+export default { generatePIX, verifyPIX, configWebhook, statusPix, verifyStatusPix };
