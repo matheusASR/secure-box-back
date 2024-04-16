@@ -86,11 +86,16 @@ const verifyPIX = async (req: Request, res: Response): Promise<any> => {
 };
 
 const statusPix = async (req: Request, res: Response): Promise<any> => {
-  // const payload = req.body.pix
-  // const pixCreated = pixRepository.create(payload);
-  // await pixRepository.save(pixCreated);
-  console.log(req.body)
-  return res.status(200).end();
+  const payload = req.body.pix
+  const payloadPix = {
+    endToEndId: payload.endToEndId,
+    txid: payload.txid,
+    valor: payload.valor,
+    horario: payload.horario,
+    chave: payload.chave
+  }
+  const pixCreated = pixRepository.create(payloadPix);
+  await pixRepository.save(pixCreated);
 };
 
 const configWebhook = async (req: Request, res: Response): Promise<any> => {
