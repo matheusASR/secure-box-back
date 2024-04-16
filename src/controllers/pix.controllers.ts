@@ -86,19 +86,26 @@ const verifyPIX = async (req: Request, res: Response): Promise<any> => {
 };
 
 const statusPix = async (req: Request, res: Response): Promise<any> => { 
-  const array = req.body.pix
-  array.forEach(async (e: any) => {
+  const array = req.body.pix;
+  
+  for (const e of array) {
     const payload = {
       endToEndId: e.endToEndId,
       txid: e.txid,
       chave: e.chave,
       valor: e.valor,
       horario: e.horario
+    };
+
+    try {
+      const pixCreated = pixRepository.create(payload);
+      await pixRepository.save(pixCreated);
+    } catch (error: any) {
+      return res.status(500).json({ "error": "Erro ao salvar pix no banco de dados" });
     }
-    const pixCreated = pixRepository.create(payload)
-    await pixRepository.save(pixCreated);
-  });
-  return res.status(200).end()
+  }
+
+  return res.status(200).end();
 };
 
 const configWebhook = async (req: Request, res: Response): Promise<any> => {
