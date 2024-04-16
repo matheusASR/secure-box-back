@@ -85,8 +85,19 @@ const verifyPIX = async (req: Request, res: Response): Promise<any> => {
   return res.status(200).end()
 };
 
-const statusPix = async (req: Request, res: Response): Promise<any> => {
-  console.log(req.body)
+const statusPix = async (req: Request, res: Response): Promise<any> => { 
+  const array = req.body.pix
+  array.forEach(async (e: any) => {
+    const payload = {
+      endToEndId: e.endToEndId,
+      txid: e.txid,
+      chave: e.chave,
+      valor: e.valor,
+      horario: e.horario
+    }
+    const pixCreated = pixRepository.create(payload)
+    await pixRepository.save(pixCreated);
+  });
   return res.status(200).end()
 };
 
