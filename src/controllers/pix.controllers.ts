@@ -86,9 +86,11 @@ const verifyPIX = async (req: Request, res: Response): Promise<any> => {
 };
 
 const statusPix = async (req: Request, res: Response): Promise<any> => {
-  const payload = req.body.pix
-  const pixCreated = pixRepository.create(payload);
-  await pixRepository.save(pixCreated);
+  // const payload = req.body.pix
+  // const pixCreated = pixRepository.create(payload);
+  // await pixRepository.save(pixCreated);
+  console.log(req.body)
+  return res.status(200).end();
 };
 
 const configWebhook = async (req: Request, res: Response): Promise<any> => {
