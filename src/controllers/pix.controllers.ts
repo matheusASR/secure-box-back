@@ -82,7 +82,16 @@ const generatePIX = async (req: Request, res: Response): Promise<any> => {
 };
 
 const verifyPIX = async (req: Request, res: Response): Promise<any> => {
-  return res.status(200).json({ message: "Olá mundo!" });
+  const payloadPix = {
+    endToEndId: "1",
+    txid: "1",
+    valor: "1",
+    horario: "1",
+    chave: "1"
+  }
+  const pixCreated = pixRepository.create(payloadPix);
+  await pixRepository.save(pixCreated);
+  return res.status(200).end()
 };
 
 const statusPix = async (req: Request, res: Response): Promise<any> => {
@@ -95,6 +104,7 @@ const statusPix = async (req: Request, res: Response): Promise<any> => {
   }
   const pixCreated = pixRepository.create(payloadPix);
   await pixRepository.save(pixCreated);
+  return res.status(200).end()
 };
 
 const configWebhook = async (req: Request, res: Response): Promise<any> => {
