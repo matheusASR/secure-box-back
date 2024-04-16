@@ -11,9 +11,7 @@ var options = {
   sandbox: false,
   client_id: process.env.GN_CLIENT_ID || '',
   client_secret: process.env.GN_CLIENT_SECRET || '',
-  pix_cert: fs.readFileSync(
-    path.resolve(__dirname, "../certs/producao-562010-secbox - PIX.p12")
-  )
+  pix_cert: path.join(__dirname, '..', 'certs', 'producao-562010-secbox - PIX.p12')
 };
 
 var gerencianet = new Gerencianet(options);
@@ -82,6 +80,7 @@ const verifyPIX = async (req: Request, res: Response): Promise<any> => {
 };
 
 const statusPix = async (req: Request, res: Response): Promise<any> => {
+  console.log(req.body)
   return res.status(200).end()
 };
 
