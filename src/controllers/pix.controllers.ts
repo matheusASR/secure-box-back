@@ -129,9 +129,9 @@ const verifyStatusPix = async (req: Request, res: Response): Promise<any> => {
     where: { txid }
   });
   if (txidFound) {
-    return res.status(200).end()
+    return true
   } else {
-    return res.status(404).end()
+    return false
   }
 };
 
