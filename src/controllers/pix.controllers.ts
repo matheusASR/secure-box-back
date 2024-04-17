@@ -64,7 +64,7 @@ const generatePIX = async (req: Request, res: Response): Promise<any> => {
         expiracao: 3600,
       },
       valor: {
-        original: "0.05",
+        original: value.toFixed(2),
       },
       chave: "2b720e07-d74a-42b8-ba94-cfa71bc9ca8d",
       solicitacaoPagador: "Cobrança dos serviços prestados.",
