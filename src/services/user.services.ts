@@ -80,8 +80,6 @@ const sendCode = async (payload: any): Promise<void> => {
   var transporter = nodemailer.createTransport({
     service: "gmail",
     host: "smtp.gmail.com",
-    port: 587,
-    secure: false,
     auth: {
       user: "regomatheus881@gmail.com",
       pass: process.env.APP_PASSWORD
