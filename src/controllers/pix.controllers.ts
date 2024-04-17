@@ -24,7 +24,7 @@ var gerencianet = new Gerencianet(options);
 
 const generatePIX = async (req: Request, res: Response): Promise<any> => {
   const payload = req.body;
-  const value = payload.value;
+  const value = Number(payload.value).toFixed();
   try {
     const cert = fs.readFileSync(
       path.resolve(__dirname, "../certs/producao-562010-secbox - PIX.p12")
@@ -64,7 +64,7 @@ const generatePIX = async (req: Request, res: Response): Promise<any> => {
         expiracao: 3600,
       },
       valor: {
-        original: value.toFixed(2),
+        original: value,
       },
       chave: "2b720e07-d74a-42b8-ba94-cfa71bc9ca8d",
       solicitacaoPagador: "Cobrança dos serviços prestados.",
