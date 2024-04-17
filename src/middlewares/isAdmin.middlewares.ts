@@ -25,7 +25,6 @@ const isAdmin = async (req: Request, res: Response, next: NextFunction) => {
     if (error instanceof AppError) {
       res.status(403).json({ message: error.message });
     } else {
-      console.error(error); // Log unexpected errors for debugging
       res.status(500).json({ message: "Erro interno do servidor" }); // Generic error for client
     }
   }

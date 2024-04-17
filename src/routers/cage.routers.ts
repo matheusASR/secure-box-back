@@ -6,7 +6,7 @@ export const cageRouter: Router = Router();
 
 cageRouter.use("/:id", middlewares.verifyCageIdExists);
 
-cageRouter.post("", middlewares.isAdmin, cageControllers.create);
+cageRouter.post("", cageControllers.create);
 
 cageRouter.get("", middlewares.verifyToken, cageControllers.read);
 
