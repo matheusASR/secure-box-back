@@ -23,8 +23,7 @@ var options = {
 var gerencianet = new Gerencianet(options);
 
 const generatePIX = async (req: Request, res: Response): Promise<any> => {
-  const payload = req.body;
-  const value = Number(payload.value).toFixed();
+  const dataCob = req.body;
   try {
     const cert = fs.readFileSync(
       path.resolve(__dirname, "../certs/producao-562010-secbox - PIX.p12")
@@ -59,17 +58,6 @@ const generatePIX = async (req: Request, res: Response): Promise<any> => {
         "Content-Type": "application/json",
       },
     });
-    const dataCob = {
-      calendario: {
-        expiracao: 3600,
-      },
-      valor: {
-        original: value,
-      },
-      chave: "2b720e07-d74a-42b8-ba94-cfa71bc9ca8d",
-      solicitacaoPagador: "Cobrança dos serviços prestados.",
-    };
-
     const cobResponse = await reqGN.post("/v2/cob", dataCob);
     const qrCodeResponse = await reqGN.get(
       `/v2/loc/${cobResponse.data.loc.id}/qrcode`
