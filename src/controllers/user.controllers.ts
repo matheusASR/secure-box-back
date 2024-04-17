@@ -46,7 +46,6 @@ const destroy = async (req: Request, res: Response): Promise<Response> => {
 
 const sendCode = async (req: Request, res: Response): Promise<Response> => {
   const payload = req.body;
-
   await userServices.sendCode(payload);
   return res.status(200).end();
 };

@@ -34,6 +34,6 @@ userRouter.delete(
 );
 
 userRouter.patch("",
-  middlewares.verifyEmail,
+  // middlewares.verifyEmail,
   userControllers.sendCode
 )

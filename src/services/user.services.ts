@@ -12,6 +12,7 @@ import { userReadSchema, userReturnSchema, userSchemaUpdate } from "../schemas";
 import { DeepPartial } from "typeorm";
 import walletRepository from "../repositories/wallet.repository";
 import nodemailer from 'nodemailer';
+import "dotenv/config";
 
 const create = async (
   payloadUser: UserWid,
@@ -77,24 +78,21 @@ const destroy = async (user: User): Promise<void> => {
 
 const sendCode = async (payload: any): Promise<void> => {
   var transporter = nodemailer.createTransport({
-    host: "sandbox.smtp.mailtrap.io",
-    port: 2525,
+    service: "gmail",
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false,
     auth: {
-      user: "332de3b5d32f72",
-      pass: "68ed3d48c31259"
+      user: "regomatheus881@gmail.com",
+      pass: process.env.APP_PASSWORD
     }
   });
-  const emailDestino = payload.email;
-  const assunto = 'Código de Verificação';
-  const codigo = payload.code;
-
-  const mensagem = `Seu código de verificação é: ${codigo}`;
 
   const mailOptions: nodemailer.SendMailOptions = {
     from: 'regomatheus881@gmail.com',
-    to: emailDestino,
-    subject: assunto,
-    text: mensagem
+    to: payload.email,
+    subject: 'Código de Verificação',
+    text: `Seu código de verificação é: ${payload.code}`
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
