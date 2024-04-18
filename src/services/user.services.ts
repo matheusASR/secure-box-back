@@ -82,13 +82,13 @@ const sendCode = async (payload: any): Promise<void> => {
     host: "smtp.gmail.com",
     port: 465,
     auth: {
-      user: "regomatheus881@gmail.com",
+      user: "appsecbox@gmail.com",
       pass: process.env.APP_PASSWORD
     }
   });
 
   const mailOptions: nodemailer.SendMailOptions = {
-    from: 'regomatheus881@gmail.com',
+    from: 'appsecbox@gmail.com',
     to: payload.email,
     subject: 'Código de Verificação',
     text: `Seu código de verificação é: ${payload.code}`
