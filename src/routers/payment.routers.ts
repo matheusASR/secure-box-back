@@ -7,7 +7,7 @@ export const paymentRouter: Router = Router();
 paymentRouter.post(
   "/:id",
   middlewares.verifyIdExists,
-  middlewares.verifyToken,
+  middlewares.isAdmin,
   paymentControllers.create
 );
 

@@ -1,6 +1,7 @@
 import { Router } from "express";
 import middlewares from "../middlewares";
 import { userControllers } from "../controllers";
+import { userCreateSchema } from "../schemas";
 
 export const userRouter: Router = Router();
 
@@ -8,6 +9,7 @@ userRouter.use("/:id", middlewares.verifyIdExists);
 
 userRouter.post(
   "",
+  middlewares.validateBody(userCreateSchema),
   middlewares.verifyEmailExists,
   middlewares.verifyCelExists,
   middlewares.verifyCpfExists,

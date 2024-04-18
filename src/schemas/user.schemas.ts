@@ -21,7 +21,6 @@ const userAddressSchema = z.object({
   cpf: z.string().max(11),
   cel: z.string().max(11),
   birthdate: z.string().max(10),
-  admin: z.boolean().default(false),
   address: addressCreateSchema,
 })
 
@@ -51,7 +50,7 @@ const userReturnSchema = userSchema.omit({
 });
 const userSchemaWid = userSchema.omit({ id: true })
 const userReadSchema = userReturnSchema.array();
-const userSchemaUpdate = userAddressSchema.omit({ admin: true });
+const userSchemaUpdate = userAddressSchema;
 
 export {
   userSchema,

@@ -16,7 +16,7 @@ const isAdmin = async (req: Request, res: Response, next: NextFunction) => {
     const id: any = decoded.sub;
 
     const foundUser = await userRepository.findOneBy({ id });
-    if (!foundUser || foundUser.admin === false) {
+    if (foundUser && foundUser.admin === false) {
       throw new AppError("Somente usuários admin!", 403);
     }
 

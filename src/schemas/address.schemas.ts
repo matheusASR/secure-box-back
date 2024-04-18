@@ -5,6 +5,7 @@ const addressSchema = z.object({
   street: z.string().max(100),
   number: z.string().max(50),
   city: z.string().max(100),
+  neighborhood: z.string().max(100),
   state: z.string().max(100),
   complement: z.string().max(255),
   zipCode: z.string().max(20),
