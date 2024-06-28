@@ -11,7 +11,7 @@ import { addressRepository, userRepository } from "../repositories";
 import { userReadSchema, userReturnSchema, userSchemaUpdate } from "../schemas";
 import { DeepPartial } from "typeorm";
 import walletRepository from "../repositories/wallet.repository";
-import nodemailer from 'nodemailer';
+import { Resend } from "resend";
 import "dotenv/config";
 
 const create = async (
@@ -23,14 +23,14 @@ const create = async (
 
   const addressCreated = addressRepository.create({
     ...payloadAddress,
-    user: userCreated
+    user: userCreated,
   });
   await addressRepository.save(addressCreated);
 
   const walletCreated = walletRepository.create({
     balance: Number(0),
-    user: userCreated
-  })
+    user: userCreated,
+  });
   await walletRepository.save(walletCreated);
 
   return userReturnSchema.parse(userCreated);
@@ -54,51 +54,46 @@ const update = async (
 ): Promise<any> => {
   const userID: any = Number(foundUser.id);
   const userAddress = await addressRepository.findOne({
-    where: { user: {id: userID} }
+    where: { user: { id: userID } },
   });
 
-  const userUpdated = await userRepository.save({ ...foundUser, ...payload })
+  const userUpdated = await userRepository.save({ ...foundUser, ...payload });
 
   if (payload.address) {
-    const addressUpdated = await addressRepository.save({ ...userAddress, ...payload.address });
+    const addressUpdated = await addressRepository.save({
+      ...userAddress,
+      ...payload.address,
+    });
     return {
       ...userUpdated,
-      address: {...addressUpdated}
-    }
+      address: { ...addressUpdated },
+    };
   }
 
   return {
-    ...userUpdated
-  }
+    ...userUpdated,
+  };
 };
 
 const destroy = async (user: User): Promise<void> => {
   await userRepository.remove(user);
 };
 
-const sendCode = async (payload: any): Promise<void> => {
-  var transporter = nodemailer.createTransport({
-    service: "gmail",
-    host: "smtp.gmail.com",
-    port: 465,
-    auth: {
-      user: "appsecbox@gmail.com",
-      pass: process.env.APP_PASSWORD
-    }
+const sendCode = async (payload: any): Promise<any> => {
+  const resend = new Resend(process.env.RESEND_API_KEY);
+
+  const { data, error } = await resend.emails.send({
+    from: "Acme <appsecbox@gmail.com>",
+    to: [payload.email],
+    subject: "Código de Verificação (Secbox App)",
+    html: "<h1>Seu código de verificação é: <strong>${payload.code}</strong>. <strong>Não o compartilhe!</strong></h1>",
   });
 
-  const mailOptions: nodemailer.SendMailOptions = {
-    from: 'appsecbox@gmail.com',
-    to: payload.email,
-    subject: 'Código de Verificação',
-    text: `Seu código de verificação é: ${payload.code}`
-  };
+  if (error) {
+    return error;
+  }
 
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.log('Erro ao enviar e-mail:', error);
-    }
-  });
+  return data;
 };
 
 export default { create, read, retrieve, update, destroy, sendCode };
